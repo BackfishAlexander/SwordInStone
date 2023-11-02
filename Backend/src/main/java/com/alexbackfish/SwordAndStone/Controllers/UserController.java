@@ -60,7 +60,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/")
+    @GetMapping("/login")
     public String defaultPage() {
         return "<h1>Spring Server is running</h1>";
     }
