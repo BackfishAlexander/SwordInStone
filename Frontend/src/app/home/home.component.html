@@ -1,0 +1,40 @@
+<div class="container">
+    <h1>User logged in: <span *ngIf="username; else noUser">{{ username }}</span></h1>
+    <ng-template #noUser>No user logged in</ng-template>
+    <!-- <button (click)="navigateToLogin()">Login</button> -->
+</div>
+
+
+<!-- Button to open the modal -->
+<button (click)="openModal()">Create Campaign</button>
+
+<!-- Modal -->
+<div class="modal" *ngIf="showModal">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <form (submit)="submitCampaign()">
+      <div class="form-group">
+        <label for="campaignName">Campaign Name:</label>
+        <input type="text" id="campaignName" [(ngModel)]="campaign.campaignName" name="campaignName" required>
+      </div>
+      <div class="form-group">
+        <label for="campaignDescription">Campaign Description:</label>
+        <textarea id="campaignDescription" [(ngModel)]="campaign.campaignDescription" name="campaignDescription" required></textarea>
+      </div>
+      <button type="submit">Submit Campaign</button>
+    </form>
+  </div>
+</div>
+
+
+<!-- Grid of Campaigns -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let campaign of campaigns">
+      <div class="campaign-box" (click)="goToCampaign(campaign.id)">
+        <h2>{{ campaign.name }}</h2>
+        <p>{{ campaign.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>

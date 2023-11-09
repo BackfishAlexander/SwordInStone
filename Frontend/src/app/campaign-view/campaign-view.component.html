@@ -1,0 +1,22 @@
+<!-- campaign-view.component.html -->
+<div class="campaign-container">
+    <h1>{{ campaign?.campaignName }}</h1>
+    <p class="description">{{ campaign?.campaignDescription }}</p>
+    <div class="character-list">
+      <div *ngFor="let character of campaign?.playerCharacters" class="character-card">
+        <img class="character-image" [src]="character.imageID" alt="{{ character.characterName }}">
+        <div class="character-details">
+          <h2>{{ character.characterName }}</h2>
+          <!-- Add more character details here if needed -->
+        </div>
+      </div>
+      <!-- Create Character Button Container -->
+      <div class="create-character-card">
+        <button class="create-character-button" (click)="openCreateCharacterModal()">Create a Character</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add this to the campaign-view.component.html -->
+  <app-create-character-modal *ngIf="isCreateCharacterModalOpen" (close)="closeCreateCharacterModal()"></app-create-character-modal>
+

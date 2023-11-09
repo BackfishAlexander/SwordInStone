@@ -1,0 +1,77 @@
+/* campaign-view.component.css */
+.campaign-container {
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  .description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .character-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .character-card {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Adjust based on your layout preference */
+    max-width: 600px; /* Adjust for maximum width */
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .character-image {
+    height: 100px; /* Adjust as needed */
+    width: 100px; /* Adjust as needed */
+    border-radius: 50%;
+    object-fit: cover; /* This will ensure the image covers the area without stretching */
+    margin-right: 1rem;
+  }
+  
+  .character-details {
+    text-align: left;
+    flex-grow: 1;
+  }
+  
+  h2 {
+    margin: 0;
+  }
+  
+  /* campaign-view.component.css */
+/* ... (other styles) ... */
+
+.create-character-card {
+    width: 100%; /* Adjust based on your layout preference */
+    max-width: 600px; /* Should match the width of the character cards */
+    margin-bottom: 1rem;
+    text-align: center; /* This will align the button text if the button width is less than container width */
+  }
+  
+  .create-character-button {
+    padding: 1rem 2rem; /* Adds padding inside the button */
+    border: none; /* No border */
+    border-radius: 10px; /* Rounded corners like the character cards */
+    background-color: #007bff; /* A blue background */
+    color: white; /* White text */
+    font-size: 1rem; /* Adjust as needed */
+    cursor: pointer; /* Changes the cursor to a pointer on hover */
+    outline: none; /* Removes the outline to keep the modern look */
+    width: 100%; /* Button expands to the width of its container */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Similar shadow as the character cards */
+  }
+  
+  .create-character-button:hover {
+    background-color: #0056b3; /* Darker blue on hover for feedback */
+  }
+  
