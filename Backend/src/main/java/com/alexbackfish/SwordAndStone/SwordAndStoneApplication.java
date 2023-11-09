@@ -9,7 +9,8 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 		"com.alexbackfish.SwordAndStone.Repositories",
 		"com.alexbackfish.SwordAndStone.DTOs",
 		"com.alexbackfish.SwordAndStone.Controllers",
-		"com.alexbackfish.SwordAndStone.Configurations"})
+		"com.alexbackfish.SwordAndStone.Configurations",
+		"com.alexbackfish.SwordAndStone.Services"})
 public class SwordAndStoneApplication {
 
 	public static void main(String[] args) {

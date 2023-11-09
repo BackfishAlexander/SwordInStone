@@ -1,19 +1,41 @@
+/* Reset margin and padding for the body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+}
+
 .navbar {
     background-color: #333;
     padding: 10px 20px;
     color: white;
+    display: flex;
+    align-items: center; /* Aligns items vertically in the center */
+    justify-content: space-between; /* Spreads out navbar items */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
 }
 
+/* Styling for the buttons and navbar content */
 .navbar button {
-    background-color: #555;
-    border: none;
+    background-color: transparent; /* More modern than a solid background */
+    border: 1px solid white; /* Slight border */
     color: white;
     padding: 8px 16px;
     text-decoration: none;
-    margin: 4px 2px;
+    margin: 0 10px; /* Spacing between buttons */
     cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover */
+    border-radius: 20px; /* Rounded corners for the button */
 }
 
 .navbar button:hover {
-    background-color: #777;
+    background-color: white;
+    color: #333;
+    border-color: white; /* Keep border color consistent on hover */
+}
+
+/* Additional modern touches */
+.navbar button:focus {
+    outline: none; /* Removes the default focus outline */
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5); /* Adds a glow effect when focused */
 }

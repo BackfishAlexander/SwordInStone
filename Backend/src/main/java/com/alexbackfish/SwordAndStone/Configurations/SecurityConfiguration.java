@@ -22,7 +22,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/login").permitAll()
                 .requestMatchers("/register").permitAll()
                 .requestMatchers("/default").permitAll()
-                .requestMatchers("/private/**").authenticated();
+                .requestMatchers("/private/**").permitAll();
         http.cors(AbstractHttpConfigurer::disable);
         http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
