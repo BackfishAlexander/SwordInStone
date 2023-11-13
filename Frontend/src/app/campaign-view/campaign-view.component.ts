@@ -25,12 +25,18 @@ export class CampaignViewComponent implements OnInit {
   campaign: any;
   campaignId: any;
   isCreateCharacterModalOpen: boolean = false;
+  activeTab: string = 'characters';  // Default active tab
 
   constructor(
     private campaignService: CampaignService,
     private route: ActivatedRoute,
     private cd: ChangeDetectorRef
   ) {}
+
+
+  setActiveTab(tab: string): void {
+    this.activeTab = tab;
+  }
 
   openCreateCharacterModal(): void {
     console.log('Opening modal');
