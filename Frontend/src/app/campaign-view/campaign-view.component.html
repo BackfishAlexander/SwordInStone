@@ -13,26 +13,14 @@
 
   <!-- Tab Content -->
   <div class="tab-content">
-    <div *ngIf="activeTab === 'characters'">
-      <!-- Existing characters list and create character button -->
-      <div class="create-character-card">
-        <button class="create-character-button" (click)="openCreateCharacterModal()">Create a Character</button>
-      </div>
-      <div *ngFor="let character of campaign?.playerCharacters" class="character-card">
-        <img class="character-image" [src]="character.imageID" alt="{{ character.characterName }}">
-        <div class="character-details">
-          <h2>{{ character.characterName }}</h2>
-          <!-- Add more character details here if needed -->
-        </div>
-      </div>
+    <div [hidden]="activeTab !== 'characters'">
+      <app-character-list type="campaign"></app-character-list>
     </div>
-    <div *ngIf="activeTab === 'shops'">
+    <div [hidden]="activeTab !== 'shops'">
       <p>Shops content will go here. You can edit this later.</p>
     </div>
-    <div *ngIf="activeTab === 'board'">
+    <div [hidden]="activeTab !== 'board'">
       <p>Board content will go here. You can edit this later.</p>
     </div>
   </div>
-
-  <app-create-character-modal *ngIf="isCreateCharacterModalOpen" (close)="closeCreateCharacterModal()"></app-create-character-modal>
 </div>

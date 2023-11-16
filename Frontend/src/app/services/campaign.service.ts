@@ -7,10 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class CampaignService {
   private baseUrl = 'http://localhost:8080/private/campaign/view/';
+  private playerCList = 'http://localhost:8080/private/user/playerlist/';
 
   constructor(private http: HttpClient) {}
 
   getCampaign(id: string): Observable<any> {
     return this.http.get(`${this.baseUrl}${id}`);
+  }
+  
+  getUserPlayers(id: string): Observable<any> {
+    return this.http.get(`${this.playerCList}${id}`);
   }
 }

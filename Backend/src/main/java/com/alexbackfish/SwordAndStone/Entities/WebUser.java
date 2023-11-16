@@ -1,66 +1,76 @@
 package com.alexbackfish.SwordAndStone.Entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "WebUser")
-public class WebUser {
+public class WebUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
     private String password;
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Campaign> campaigns = new HashSet<>();
-
+    private final Set<Campaign> campaigns = new HashSet<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PlayerCharacter> playerCharacters = new HashSet<>();
+    private final Set<PlayerCharacter> playerCharacters = new HashSet<>();
 
-    public WebUser() {
+
+
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    // Getters and setters for all fields including campaigns
-
-
-    public Set<PlayerCharacter> getPlayerCharacters() {
-        return playerCharacters;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public void addPlayerCharacter(PlayerCharacter playerCharacter) {
-        playerCharacters.add(playerCharacter);
-        playerCharacter.setUser(this);
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    // Method to remove a campaign from the user
-    public void removePlayerCharacter(PlayerCharacter playerCharacter) {
-        campaigns.remove(playerCharacter);
-        playerCharacter.setUser(null);
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
-    public Long getId() {
-        return id;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
-    public String getUsername() {
-        return username;
-    }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public Set<Campaign> getCampaigns() {
-        return campaigns;
-    }
 
-    public void setCampaigns(Set<Campaign> campaigns) {
-        this.campaigns = campaigns;
-    }
 
-    // Method to add a campaign to the user
+
+
+//     Method to add a campaign to the user
     public void addCampaign(Campaign campaign) {
         campaigns.add(campaign);
         campaign.setUser(this);
@@ -70,5 +80,9 @@ public class WebUser {
     public void removeCampaign(Campaign campaign) {
         campaigns.remove(campaign);
         campaign.setUser(null);
+    }
+
+    public void addPlayerCharacter(PlayerCharacter playerCharacter) {
+        playerCharacters.add(playerCharacter);
     }
 }

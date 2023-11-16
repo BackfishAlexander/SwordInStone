@@ -11,6 +11,8 @@ import { HomeComponent } from './home/home.component';
 import { CampaignViewComponent } from './campaign-view/campaign-view.component';
 import { CreateCharacterModalComponent } from './create-character-modal/create-character-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CharacterListComponent } from './character-list/character-list.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     RegisterComponent,
     HomeComponent,
     CampaignViewComponent,
-    CreateCharacterModalComponent
+    CreateCharacterModalComponent,
+    CharacterListComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

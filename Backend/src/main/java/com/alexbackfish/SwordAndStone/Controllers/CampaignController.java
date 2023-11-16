@@ -1,6 +1,7 @@
 package com.alexbackfish.SwordAndStone.Controllers;
 
 import com.alexbackfish.SwordAndStone.DTOs.CreateCampaignDTO;
+import com.alexbackfish.SwordAndStone.DTOs.JoinCampaignDTO;
 import com.alexbackfish.SwordAndStone.Entities.Campaign;
 import com.alexbackfish.SwordAndStone.Entities.WebUser;
 import com.alexbackfish.SwordAndStone.Repositories.CampaignRepository;
@@ -60,6 +61,25 @@ public class CampaignController {
 
         // Store the user (make sure to hash the password before storing in real applications!)
         webUserService.addCampaignToUser(user.get().getId(), campaign);
+
+        return new ResponseEntity<>("Added new campaign to user", HttpStatus.OK);
+    }
+
+
+    @PostMapping("/private/campaign/join")
+    public ResponseEntity<?> joinCampaign(@RequestBody JoinCampaignDTO formData) {
+        Optional<WebUser> userOptional = userRepository.findByUsername(formData.getUsername());
+        Optional<Campaign> campaignOptional = campaignRepository.findById(formData.getCampaignId());
+
+        if(!userOptional.isPresent()) {
+            return new ResponseEntity<>("Username doesn't exist!", HttpStatus.BAD_REQUEST);
+        }
+        if (!campaignOptional.isPresent()) {
+            return new ResponseEntity<>("Campaign doesn't exist!", HttpStatus.BAD_REQUEST);
+        }
+
+        // Store the user (make sure to hash the password before storing in real applications!)
+        webUserService.addCampaignToUser(userOptional.get().getId(), campaignOptional.get());
 
         return new ResponseEntity<>("Added new campaign to user", HttpStatus.OK);
     }

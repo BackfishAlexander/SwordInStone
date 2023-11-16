@@ -2,19 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CampaignService } from '../services/campaign.service'; // Adjust the import path as needed
 import { ChangeDetectorRef } from '@angular/core';
+import { PlayerCharacter } from '../DTOs/PlayerCharacter';
 
-
-interface PlayerCharacter {
-  characterId: number;
-  characterName: string;
-  imageID: string;
-  str: number;
-  dex: number;
-  wis: number;
-  int: number;
-  cha: number;
-  // Add any other properties that player characters have
-}
 
 @Component({
   selector: 'app-campaign-view',
@@ -22,33 +11,16 @@ interface PlayerCharacter {
   styleUrls: ['./campaign-view.component.css']
 })
 export class CampaignViewComponent implements OnInit {
+  activeTab: string = 'characters';  // Default active tab
   campaign: any;
   campaignId: any;
   isCreateCharacterModalOpen: boolean = false;
-  activeTab: string = 'characters';  // Default active tab
 
   constructor(
     private campaignService: CampaignService,
     private route: ActivatedRoute,
     private cd: ChangeDetectorRef
   ) {}
-
-
-  setActiveTab(tab: string): void {
-    this.activeTab = tab;
-  }
-
-  openCreateCharacterModal(): void {
-    console.log('Opening modal');
-    this.isCreateCharacterModalOpen = true;
-    this.cd.detectChanges();
-  }
-
-  closeCreateCharacterModal(): void {
-    console.log('Closing modal');
-    this.isCreateCharacterModalOpen = false;
-    this.cd.detectChanges();
-  }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -66,5 +38,9 @@ export class CampaignViewComponent implements OnInit {
         }
       );
     });
+  }
+
+  setActiveTab(tab: string): void {
+    this.activeTab = tab;
   }
 }

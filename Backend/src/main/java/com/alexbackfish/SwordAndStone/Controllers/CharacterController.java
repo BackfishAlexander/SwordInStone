@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -61,5 +58,23 @@ public class CharacterController {
         playerCampaignService.addPlayer(user.get().getId(), campaign.get().getId(), character);
 
         return new ResponseEntity<>("Added new campaign to user", HttpStatus.OK);
+    }
+
+    /**
+     * Returns all information needed to display a User's players
+     *
+     * @author backfish.alexander@gmail.com
+     */
+    @GetMapping(value = "/private/user/playerlist/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> campaignView(@PathVariable("id") String id) {
+        Optional<WebUser> userOptional = userRepository.findByUsername(id);
+
+        if(!userOptional.isPresent()) {
+            return new ResponseEntity<>("Player doesn't exist!", HttpStatus.BAD_REQUEST);
+        }
+
+        WebUser user = userOptional.get();
+
+        return new ResponseEntity<>(user.getPlayerCharacters(), HttpStatus.OK);
     }
 }
