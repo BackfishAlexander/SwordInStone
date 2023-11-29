@@ -1,0 +1,13 @@
+<!-- Existing characters list and create character button -->
+<div class="create-character-card">
+    <button *ngIf="createButtonOn" class="create-character-button" (click)="openCreateCharacterModal()">Create a Character</button>
+  </div>
+  <div *ngFor="let character of characters" class="character-card">
+    <img class="character-image" [src]="character.imageID" alt="{{ character.characterName }}">
+    <div class="character-details">
+      <h2>{{ character.characterName }}</h2>
+      <!-- Add more character details here if needed -->
+    </div>
+  </div>
+
+<app-create-character-modal *ngIf="isCreateCharacterModalOpen" (close)="closeCreateCharacterModal()"></app-create-character-modal>

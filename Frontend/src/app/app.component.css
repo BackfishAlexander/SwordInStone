@@ -1,19 +1,6 @@
-.navbar {
-    background-color: #333;
-    padding: 10px 20px;
-    color: white;
-}
-
-.navbar button {
-    background-color: #555;
-    border: none;
-    color: white;
-    padding: 8px 16px;
-    text-decoration: none;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-
-.navbar button:hover {
-    background-color: #777;
+/* Reset margin and padding for the body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
 }

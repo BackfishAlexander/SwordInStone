@@ -1,0 +1,58 @@
+/* campaign-view.component.css */
+.campaign-container {
+    text-align: center;
+  }
+  
+h1 {
+  font-size: 2.5rem;
+}
+
+.description {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+h2 {
+  margin: 0;
+}
+
+/* campaign-view.component.css */
+/* ... (other styles) ... */
+
+
+/* campaign-view.component.css */
+/* ... (Existing styles) ... */
+
+.tab-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.tab {
+  padding: 1rem 2rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-bottom: none;
+  margin: 0 0.5rem;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.tab:hover {
+  background-color: #f0f0f0;
+}
+
+.tab.active {
+  border-color: #ddd;
+  border-bottom: 1px solid white;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tab-content {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

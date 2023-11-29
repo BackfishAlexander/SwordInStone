@@ -1,16 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';  // Assuming you're using ngx-cookie-service to handle cookies
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = "Sword and Stone";
-  constructor(private router: Router) {}
+  username: string | null = null;
 
-  navigateToHome(): void {
-    this.router.navigate(['']);
+  constructor(private router: Router, 
+    private cookieService: CookieService,
+    private auth: AuthenticationService) {}
+
+  ngOnInit() {
+    if (!this.auth.isLoggedIn()) {
+      console.log("REDIRECTING TO LOGIN");
+      this.router.navigate(['/login']);
+    }
   }
 }

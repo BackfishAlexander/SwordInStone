@@ -1,0 +1,84 @@
+/* The Modal (background) */
+.modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  .campaignCreate {
+    padding: 1rem 2rem; /* Adds padding inside the button */
+    border: none; /* No border */
+    border-radius: 10px; /* Rounded corners like the character cards */
+    background-color: #007bff; /* A blue background */
+    color: white; /* White text */
+    font-size: 1rem; /* Adjust as needed */
+    cursor: pointer; /* Changes the cursor to a pointer on hover */
+    outline: none; /* Removes the outline to keep the modern look */
+    width: 100%; /* Button expands to the width of its container */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Similar shadow as the character cards */
+  }
+  
+  .campaignCreate:hover {
+    background-color: #0056b3; /* Darker blue on hover for feedback */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* Add styles for the form and input elements */
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+
+
+  /* ...existing styles... */
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-md-4 {
+  width: 33.3333%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.campaign-box {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+  cursor: pointer; /* This makes the cursor change to a pointer(hand) icon on hover */
+}
+

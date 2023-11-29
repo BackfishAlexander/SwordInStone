@@ -1,0 +1,26 @@
+<!-- campaign-view.component.html -->
+<div class="campaign-container">
+  <h1>{{ campaign?.campaignName }}</h1>
+  <p class="description">{{ campaign?.campaignDescription }}</p>
+
+  <!-- Tabs -->
+  <div class="tab-container">
+    <div class="tab" [ngClass]="{'active': activeTab === 'characters'}" (click)="setActiveTab('characters')">Characters</div>
+    <div class="tab" [ngClass]="{'active': activeTab === 'shops'}" (click)="setActiveTab('shops')">Shops</div>
+    <div class="tab" [ngClass]="{'active': activeTab === 'board'}" (click)="setActiveTab('board')">Board</div>
+    <!-- Add more tabs here -->
+  </div>
+
+  <!-- Tab Content -->
+  <div class="tab-content">
+    <div [hidden]="activeTab !== 'characters'">
+      <app-character-list type="campaign"></app-character-list>
+    </div>
+    <div [hidden]="activeTab !== 'shops'">
+      <p>Shops content will go here. You can edit this later.</p>
+    </div>
+    <div [hidden]="activeTab !== 'board'">
+      <p>Board content will go here. You can edit this later.</p>
+    </div>
+  </div>
+</div>
