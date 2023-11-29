@@ -29,8 +29,12 @@ export class NavbarComponent implements OnInit {
   }
 
   navigateToHome(): void {
-      this.router.navigate(['']);
+      this.router.navigate(['/']);
   }
+
+  navigateToLogout(): void {
+    this.router.navigate(['/logout']);
+}
 
   toggleDropdown(): void {
       this.dropdownOpen = !this.dropdownOpen;

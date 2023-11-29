@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CharacterListComponent } from './character-list/character-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ModalViewComponent } from './modal-view/modal-view.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ModalViewComponent } from './modal-view/modal-view.component';
     CreateCharacterModalComponent,
     CharacterListComponent,
     NavbarComponent,
-    ModalViewComponent
+    ModalViewComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
