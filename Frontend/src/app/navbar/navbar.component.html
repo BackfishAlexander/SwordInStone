@@ -1,0 +1,9 @@
+<nav class="navbar">
+    <button (click)="navigateToHome()">Home</button>
+    <div class="dropdown">
+        <button *ngIf="this.loggedIn" (click)="toggleDropdown()">Characters</button>
+        <div *ngIf="this.loggedIn" [hidden]="!this.dropdownOpen" class="dropdown-content">
+            <app-character-list *ngIf="this.loggedIn"  type="player no-button"></app-character-list>
+        </div>
+    </div>
+</nav>
