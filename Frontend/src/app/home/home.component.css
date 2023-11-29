@@ -11,6 +11,23 @@
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   }
+
+  .campaignCreate {
+    padding: 1rem 2rem; /* Adds padding inside the button */
+    border: none; /* No border */
+    border-radius: 10px; /* Rounded corners like the character cards */
+    background-color: #007bff; /* A blue background */
+    color: white; /* White text */
+    font-size: 1rem; /* Adjust as needed */
+    cursor: pointer; /* Changes the cursor to a pointer on hover */
+    outline: none; /* Removes the outline to keep the modern look */
+    width: 100%; /* Button expands to the width of its container */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Similar shadow as the character cards */
+  }
+  
+  .campaignCreate:hover {
+    background-color: #0056b3; /* Darker blue on hover for feedback */
+  }
   
   /* Modal Content */
   .modal-content {

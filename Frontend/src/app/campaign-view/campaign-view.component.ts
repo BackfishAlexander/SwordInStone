@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CampaignService } from '../services/campaign.service'; // Adjust the import path as needed
 import { ChangeDetectorRef } from '@angular/core';
 import { PlayerCharacter } from '../DTOs/PlayerCharacter';
+import { AuthenticationService } from '../services/authentication.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class CampaignViewComponent implements OnInit {
   constructor(
     private campaignService: CampaignService,
     private route: ActivatedRoute,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private auth: AuthenticationService
   ) {}
 
   ngOnInit(): void {
@@ -34,7 +36,9 @@ export class CampaignViewComponent implements OnInit {
           this.campaign = data;
         },
         (error) => {
-          console.error('Error fetching campaign data:', error);
+          if (error.status == 403) {
+            this.auth.logout();
+          }
         }
       );
     });

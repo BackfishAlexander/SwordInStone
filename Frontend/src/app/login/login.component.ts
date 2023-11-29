@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,9 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, 
+    private router: Router,
+    private auth: AuthenticationService) {}
 
   setCookie(name: string, value: string, days: number): void {
     let expires = '';
@@ -28,19 +31,18 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    const credentials = {
-      username: this.username,
-      password: this.password
-    };
-
-    console.log(credentials);
-
-    this.http.post('http://localhost:8080/login', credentials, { responseType: 'text' })
-      .subscribe(response => {
-        this.setCookie('username', this.username, 7);
-        document.write("Logged in with " + this.username);
-      }, error => {
-        document.write("Error logging in");
-      });
+    console.log("BUTTON CLICKED!")
+    this.auth.login(this.username, this.password).then(success => {
+      if (success) {
+        console.log('Logged in successfully');
+        this.router.navigate(['/']);
+      } else {
+        console.log('Login failed');
+        // Handle login failure
+      }
+    }).catch(error => {
+      console.error('An error occurred during login', error);
+      // Handle the error
+    });
   }
 }

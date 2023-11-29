@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';  // Assuming you're using ngx-cookie-service to handle cookies
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +11,7 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class HomeComponent implements OnInit {
-
-  username: string | null = null;
+  username: string | null = "";
   campaigns: {name: string, description: string, id: string}[] = [];
 
   showModal: boolean = false;
@@ -23,8 +23,7 @@ export class HomeComponent implements OnInit {
   };
 
   fetchCampaigns() {
-    const username = this.cookieService.get('username');
-    this.http.get<{ [key: string]: { name: string; description: string } }>(`http://localhost:8080/private/campaign/list?username=${username}`)
+    this.http.get<{ [key: string]: { name: string; description: string; } }>(`http://localhost:8080/private/campaign/list`, { headers: this.auth.getHeaders() })
       .subscribe(response => {
         this.campaigns = Object.entries(response).map(([id, { name, description }]) => ({
           id,
@@ -33,6 +32,9 @@ export class HomeComponent implements OnInit {
         }));
       }, error => {
         console.error('Failed to fetch campaigns', error);
+        if (error.status == 403) {
+          this.auth.logout();
+        }
       });
   }
 
@@ -45,30 +47,36 @@ export class HomeComponent implements OnInit {
   }
 
   closeModal() {
+    console.log("CLOSING THE MODAL!!!!");
     this.showModal = false;
   }
 
   submitCampaign() {
-    this.campaign.username = this.cookieService.get('username');
     // Implement submission logic here
     console.log('Campaign Submitted:', this.campaign);
-    this.http.post('http://localhost:8080/private/campaign/add', this.campaign, { responseType: 'text' })
+    this.http.post('http://localhost:8080/private/campaign/add', this.campaign, { headers: this.auth.getHeaders(), responseType: 'text' })
       .subscribe(response => {
         this.fetchCampaigns();
       }, error => {
-        document.write("campaign failed to add " + this.campaign.campaignName);
+        if (error.status == 403) {
+          this.auth.logout();
+        }
       });
     this.closeModal();
   }
   
-  constructor(private cookieService: CookieService, private router: Router, private http: HttpClient) {
+  constructor(private cookieService: CookieService, 
+    private router: Router, 
+    private http: HttpClient,
+     private auth: AuthenticationService) {
   }
 
   
 
   ngOnInit() {
-    this.username = this.cookieService.get('username') || null;
-    if (this.username == null) {
+    this.username = this.auth.getUsername();
+
+    if (!this.auth.isLoggedIn()) {
       this.router.navigate(['/login']);
     }
 

@@ -6,7 +6,13 @@
 
 
 <!-- Button to open the modal -->
-<button (click)="openModal()">Create Campaign</button>
+<button class="campaignCreate" (click)="openModal()">Create Campaign</button>
+
+<!-- <app-modal-view *ngIf="">
+  <span class="close" (click)="closeModal()">&times;</span>
+  <p>This is my new modal viewer</p>
+  <p>This my is second paragraph</p>
+</app-modal-view> -->
 
 <!-- Modal -->
 <div class="modal" *ngIf="showModal">

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,20 +12,21 @@ export class RegisterComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private auth: AuthenticationService,
+    private router: Router) {}
 
   onSubmit() {
-    const payload = {
-      username: this.username,
-      password: this.password
-    };
-
-    this.http.post('http://localhost:8080/register', payload, { responseType: 'text' }).subscribe(response => {
-      console.log('Registration successful!', response);
-      document.write("successfully registered account " + this.username);
-    }, error => {
-      console.error('Registration failed:', error);
-      document.write("fialed to register account " + this.username);
+    this.auth.register(this.username, this.password).then(success => {
+      if (success) {
+        console.log('Logged in successfully');
+        this.router.navigate(['/']);
+      } else {
+        console.log('Login failed');
+        // Handle login failure
+      }
+    }).catch(error => {
+      console.error('An error occurred during login', error);
+      // Handle the error
     });
+   }
   }
-}

@@ -51,11 +51,11 @@ export class CreateCharacterModalComponent implements OnInit {
       this.characterService.createCharacter(formData).subscribe(
         response => {
           console.log('Character created:', response);
-          window.location.reload();
+          //window.location.reload();
         },
         error => {
           console.error("backend error.");
-          window.location.reload();
+          //window.location.reload();
           //TODO: Make this show a visible error.
         }
       );

@@ -28,6 +28,8 @@ public class PlayerCampaignService {
         Campaign campaign = campaignRepository.findById(campaignId).orElseThrow(() -> new RuntimeException("Campaign not found"));
 
         user.addPlayerCharacter(playerCharacter);
+        playerCharacter.setUser(user);
+        playerCharacter.setCampaign(campaign);
         campaign.addPlayerCharacter(playerCharacter);
         playerCharacterRepository.save(playerCharacter); // This line will save changes to the database
     }

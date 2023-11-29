@@ -13,6 +13,7 @@ import { CreateCharacterModalComponent } from './create-character-modal/create-c
 import { ReactiveFormsModule } from '@angular/forms';
 import { CharacterListComponent } from './character-list/character-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ModalViewComponent } from './modal-view/modal-view.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     CampaignViewComponent,
     CreateCharacterModalComponent,
     CharacterListComponent,
-    NavbarComponent
+    NavbarComponent,
+    ModalViewComponent
   ],
   imports: [
     BrowserModule,

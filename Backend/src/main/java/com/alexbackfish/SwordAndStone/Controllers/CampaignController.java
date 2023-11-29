@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -44,12 +45,14 @@ public class CampaignController {
      */
     @PostMapping("/private/campaign/add")
     public ResponseEntity<?> addCampaign(@RequestBody CreateCampaignDTO formData) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         System.out.println("Registration request...");
         // Check if username already exists
 
-        System.out.printf("/add-campaign formdata: %s for %s\n", formData.getCampaignName(), formData.getUsername());
 
-        Optional<WebUser> user = userRepository.findByUsername(formData.getUsername());
+        System.out.printf("/add-campaign formdata: %s for %s\n", formData.getCampaignName(), username);
+
+        Optional<WebUser> user = userRepository.findByUsername(username);
 
         if(!user.isPresent()) {
             return new ResponseEntity<>("Username doesn't exist!", HttpStatus.BAD_REQUEST);
@@ -68,7 +71,9 @@ public class CampaignController {
 
     @PostMapping("/private/campaign/join")
     public ResponseEntity<?> joinCampaign(@RequestBody JoinCampaignDTO formData) {
-        Optional<WebUser> userOptional = userRepository.findByUsername(formData.getUsername());
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        Optional<WebUser> userOptional = userRepository.findByUsername(username);
         Optional<Campaign> campaignOptional = campaignRepository.findById(formData.getCampaignId());
 
         if(!userOptional.isPresent()) {
@@ -101,11 +106,12 @@ public class CampaignController {
      * @author backfish.alexander@gmail.com
      */
     @GetMapping(value = "/private/campaign/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> campaignList(@RequestParam(value="username") String formData) {
+    public ResponseEntity<?> campaignList() {
         System.out.println("/private/view-campaigns request...");
         // Check if username already exists
 
-        Optional<WebUser> user = userRepository.findByUsername(formData);
+        System.out.println("LISTING FOR " + SecurityContextHolder.getContext().getAuthentication().getName());
+        Optional<WebUser> user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 
         if(!user.isPresent()) {
             return new ResponseEntity<>("Username doesn't exist!", HttpStatus.BAD_REQUEST);
@@ -120,7 +126,6 @@ public class CampaignController {
             body.put(c.getId(), campaign);
         }
 
-        // Store the user (make sure to hash the password before storing in real applications!)
         return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
@@ -151,6 +156,7 @@ public class CampaignController {
     @GetMapping(value = "/private/campaign/view/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> campaignView(@PathVariable("id") Long id) {
         System.out.println("/private/campaign/view/{id} request...");
+
 
         Optional<Campaign> campaignOptional = campaignRepository.findById(id);
 

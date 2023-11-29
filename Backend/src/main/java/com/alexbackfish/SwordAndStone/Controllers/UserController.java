@@ -102,19 +102,19 @@ public class UserController {
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
-    @GetMapping("/login")
+    @GetMapping("/")
     public String defaultPage() {
         return "<h1>Spring Server is running</h1>";
     }
 
-    @GetMapping("/test-a")
-    public String testA() {
-        return "<h1>requires authentication</h1>";
-    }
-
-    @GetMapping("/test-b")
-    public String testB() {
-        return "<h1>doesnt require authentication</h1>";
-    }
+//    @GetMapping("/test-a")
+//    public String testA() {
+//        return "<h1>requires authentication</h1>";
+//    }
+//
+//    @GetMapping("/test-b")
+//    public String testB() {
+//        return "<h1>doesnt require authentication</h1>";
+//    }
 }
 
