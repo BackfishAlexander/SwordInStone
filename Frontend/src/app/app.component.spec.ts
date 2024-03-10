@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'SwordAndStone'`, () => {
+  it(`should have as title 'sword-in-stone'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('SwordAndStone');
+    expect(app.title).toEqual('sword-in-stone');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('SwordAndStone app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('sword-in-stone app is running!');
   });
 });

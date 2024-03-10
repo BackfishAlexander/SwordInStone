@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "SwordAndStone": {
+    "sword-in-stone": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/sword-and-stone",
+            "outputPath": "dist/sword-in-stone",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "SwordAndStone:build:production"
+              "browserTarget": "sword-in-stone:build:production"
             },
             "development": {
-              "browserTarget": "SwordAndStone:build:development"
+              "browserTarget": "sword-in-stone:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "SwordAndStone:build"
+            "browserTarget": "sword-in-stone:build"
           }
         },
         "test": {
@@ -96,6 +96,6 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": "bf2ba084-3e9f-49a9-a4fc-494296f75ba3"
   }
 }
