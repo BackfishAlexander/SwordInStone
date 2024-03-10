@@ -85,7 +85,7 @@ public class UserController {
 
 
 
-
+    //admin admin
 
 
     @PostMapping("/register")
@@ -102,7 +102,7 @@ public class UserController {
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
-    @GetMapping("/")
+    @GetMapping("/test")
     public String defaultPage() {
         return "<h1>Spring Server is running</h1>";
     }

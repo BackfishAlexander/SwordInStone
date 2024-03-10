@@ -28,11 +28,80 @@ public class PlayerCharacter {
     private int STR;
     private int DEX;
     private int WIS;
+    private int CON;
     private int INT;
     private int CHA;
 
+    private int GP;
+    private int HP;
+    private int maxHP;
+
+    private int walkingSpeed;
+    private int AC;
+    private float maxWeight;
+
     public Campaign getCampaign() {
         return campaign;
+    }
+
+    public int getWalkingSpeed() {
+        return walkingSpeed;
+    }
+
+    public void setWalkingSpeed(int walkingSpeed) {
+        this.walkingSpeed = walkingSpeed;
+    }
+
+    public int getAC() {
+        return AC;
+    }
+
+    public Long getOwnerId() {
+        return user != null ? user.getId() : null;
+    }
+
+    public void setAC(int AC) {
+        this.AC = AC;
+    }
+
+    public float getMaxWeight() {
+        return maxWeight;
+    }
+
+    public void setMaxWeight(float maxWeight) {
+        this.maxWeight = maxWeight;
+    }
+
+    public int getCON() {
+        return CON;
+    }
+
+    public void setCON(int CON) {
+        this.CON = CON;
+    }
+
+    public int getGP() {
+        return GP;
+    }
+
+    public void setGP(int GP) {
+        this.GP = GP;
+    }
+
+    public int getHP() {
+        return HP;
+    }
+
+    public void setHP(int HP) {
+        this.HP = HP;
+    }
+
+    public int getMaxHP() {
+        return maxHP;
+    }
+
+    public void setMaxHP(int maxHP) {
+        this.maxHP = maxHP;
     }
 
     public void setCampaign(Campaign campaign) {

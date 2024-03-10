@@ -7,7 +7,7 @@ import { AuthenticationService } from './authentication.service';
   providedIn: 'root'
 })
 export class CharacterService {
-  private createUrl = 'http://localhost:8080/private/character/create';
+  private createUrl = 'http://' + this.auth.getBackendIP() + ':8080/private/character/create';
 
   constructor(private http: HttpClient, private auth: AuthenticationService) {}
 

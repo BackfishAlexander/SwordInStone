@@ -34,10 +34,19 @@ export class CampaignViewComponent implements OnInit {
             data.playerCharacters.sort((a: PlayerCharacter, b: PlayerCharacter) => a.characterName.localeCompare(b.characterName));
           }
           this.campaign = data;
+          console.log(data);
+          console.log(this.auth.getId());
         },
         (error) => {
           if (error.status == 403) {
             this.auth.logout();
+          }
+          if (error.status == 401) {
+            //TODO: Don't push the word retard into your github please
+            document.write("Nice try, retard. You don't have access to this campaign.");
+          }
+          if (error.status == 400) {
+            document.write("Error loading campaign. Please try again.");
           }
         }
       );

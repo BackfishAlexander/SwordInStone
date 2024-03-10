@@ -1,0 +1,83 @@
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust for auto-fill */
+    grid-gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .shop-box {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    cursor: default;
+    transition: transform 0.3s ease;
+    z-index: 1;
+  }
+  
+  .shop-title h2 {
+    margin: 0;
+    color: #333;
+    font-size: 1.5em;
+  }
+  
+  .shop-description {
+    color: #666;
+    margin-top: 10px;
+    font-size: 1em;
+  }
+  
+  .shop-box:hover {
+    transform: scale(1.05);
+    z-index: 10;
+  }
+  
+  .shop-menu {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2; 
+  }
+  
+  .menu-button {
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
+  .menu-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    z-index: 3;
+  }
+  
+  .menu-content span {
+    display: block;
+    color: black;
+    padding: 10px 20px;
+    text-decoration: none;
+  }
+  
+  .menu-content span:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
+  
+  .menu-button:hover + .menu-content {
+    display: block;
+  }
+  
+  .shop-menu:hover .menu-content {
+    display: block;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .shop-grid {
+      grid-template-columns: 1fr;
+    }
+  }

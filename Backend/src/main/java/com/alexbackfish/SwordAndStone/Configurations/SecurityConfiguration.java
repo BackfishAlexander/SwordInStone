@@ -19,6 +19,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -38,8 +39,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/register").permitAll()
 //                .requestMatchers("/default").permitAll()
 //                .requestMatchers("/private/**").permitAll()
-                .requestMatchers("/test-a").authenticated()
-                .requestMatchers("/test-b").permitAll()
+                .requestMatchers("/test").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement((sessionManagement) ->
@@ -61,7 +61,7 @@ public class SecurityConfiguration {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200")); // or use Collections.singletonList("*") for all
+        configuration.setAllowedOrigins(Collections.singletonList("*")); // or use Collections.singletonList("*") for all
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "x-auth-token"));
         configuration.setExposedHeaders(Arrays.asList("x-auth-token"));

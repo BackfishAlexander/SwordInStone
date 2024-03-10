@@ -15,6 +15,9 @@ import { CharacterListComponent } from './character-list/character-list.componen
 import { NavbarComponent } from './navbar/navbar.component';
 import { ModalViewComponent } from './modal-view/modal-view.component';
 import { LogoutComponent } from './logout/logout.component';
+import { ShopViewComponent } from './shop-view/shop-view.component';
+import { NotificationComponent } from './notification/notification.component';
+import { CampaignJoinComponent } from './campaign-join/campaign-join.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { LogoutComponent } from './logout/logout.component';
     CharacterListComponent,
     NavbarComponent,
     ModalViewComponent,
-    LogoutComponent
+    LogoutComponent,
+    ShopViewComponent,
+    NotificationComponent,
+    CampaignJoinComponent
   ],
   imports: [
     BrowserModule,
