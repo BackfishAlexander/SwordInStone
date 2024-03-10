@@ -1,13 +1,36 @@
-<!-- Existing characters list and create character button -->
-<div class="create-character-card">
-    <button *ngIf="createButtonOn" class="create-character-button" (click)="openCreateCharacterModal()">Create a Character</button>
-  </div>
-  <div *ngFor="let character of characters" class="character-card">
-    <img class="character-image" [src]="character.imageID" alt="{{ character.characterName }}">
-    <div class="character-details">
-      <h2>{{ character.characterName }}</h2>
-      <!-- Add more character details here if needed -->
+<div class="content-container">
+  <div class="character-container">
+    <div class="create-character-card">
+      <button *ngIf="createButtonOn" class="create-character-button" (click)="openCreateCharacterModal()">Create a Character</button>
+    </div>
+    <div *ngFor="let character of characters" class="character-card">
+      <img class="character-image" [src]="character.imageID" alt="{{ character.characterName }}">
+      <div class="character-details">
+        <h2 [ngClass]="{'clickable-name': fullView}" (click)="fullView ? onCharacterClick(character) : null">{{ character.characterName }}</h2>
+        <!-- Add more character details here if needed -->
+      </div>
     </div>
   </div>
+
+  <div *ngIf="fullView && selectedCharacter" class="character-detail-section">
+    <h2 class="character-name">{{ selectedCharacter.characterName }}</h2>
+    <hr class="modern-line">
+    <div class="character-attributes-grid">
+      <div><p>❤️: {{ selectedCharacter.hp }}/{{ selectedCharacter.maxHP }}HP</p></div>
+      <div><p>💰: {{ selectedCharacter.gp }}GP</p></div>
+    </div>
+    <hr class="modern-line">
+    <div class="character-attributes-grid">
+      <!-- Display the abbreviated attributes in two columns, with the abbreviations in bold -->
+      <div><strong>STR:</strong> {{ statToPlus(selectedCharacter.str) }}</div>
+      <div><strong>INT:</strong> {{ statToPlus(selectedCharacter.int) }}</div>
+      <div><strong>DEX:</strong> {{ statToPlus(selectedCharacter.dex) }}</div>
+      <div><strong>WIS:</strong> {{ statToPlus(selectedCharacter.wis) }}</div>
+      <div><strong>CON:</strong> {{ statToPlus(selectedCharacter.con) }}</div>
+      <div><strong>CHA:</strong> {{ statToPlus(selectedCharacter.cha) }}</div>
+      <!-- Add more abbreviated attributes as needed -->
+    </div>
+  </div>
+</div>
 
 <app-create-character-modal *ngIf="isCreateCharacterModalOpen" (close)="closeCreateCharacterModal()"></app-create-character-modal>

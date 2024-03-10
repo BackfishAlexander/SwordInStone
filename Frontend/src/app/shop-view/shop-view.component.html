@@ -1,0 +1,26 @@
+<div class="container">
+    <header>
+        <!-- <h1>Available Shops</h1> -->
+    </header>
+  
+    <div class="shop-grid">
+        <div class="shop-box" *ngFor="let shop of campaignData.shops">
+            <!-- <div class="shop-title" (click)="goToShop(shop.id)" > -->
+            <div class="shop-title">
+
+              <h2>{{ shop.shopName }}</h2>
+            </div>
+            <p>{{ shop.shopDescription }}</p>
+  
+            <div class="shop-menu">
+              <div class="menu-button">⋮</div>
+              <div class="menu-content">
+                  <!-- <span style="color: green;" (click)="editShop(shop.id)">Edit Shop</span> -->
+                  <!-- <span style="color: red;" (click)="deleteShop(shop.id)">Delete Shop</span> -->
+                  <span>hello</span>
+                  <span>world</span>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>

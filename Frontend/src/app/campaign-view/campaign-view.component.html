@@ -5,19 +5,22 @@
 
   <!-- Tabs -->
   <div class="tab-container">
+    <div class="tab" [ngClass]="{'active': activeTab === 'josh'}" (click)="setActiveTab('josh')">Joshua Henderson</div>
     <div class="tab" [ngClass]="{'active': activeTab === 'characters'}" (click)="setActiveTab('characters')">Characters</div>
     <div class="tab" [ngClass]="{'active': activeTab === 'shops'}" (click)="setActiveTab('shops')">Shops</div>
     <div class="tab" [ngClass]="{'active': activeTab === 'board'}" (click)="setActiveTab('board')">Board</div>
+    <div class="tab" [ngClass]="{'active': activeTab === 'gm'}" (click)="setActiveTab('gm')">GM Screen</div>
+
     <!-- Add more tabs here -->
   </div>
 
   <!-- Tab Content -->
   <div class="tab-content">
     <div [hidden]="activeTab !== 'characters'">
-      <app-character-list type="campaign"></app-character-list>
+      <app-character-list type="campaign full-view"></app-character-list>
     </div>
     <div [hidden]="activeTab !== 'shops'">
-      <p>Shops content will go here. You can edit this later.</p>
+      <app-shop-view [campaignData]="campaign"></app-shop-view>
     </div>
     <div [hidden]="activeTab !== 'board'">
       <p>Board content will go here. You can edit this later.</p>

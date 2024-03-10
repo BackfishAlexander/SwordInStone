@@ -1,5 +1,6 @@
 package com.alexbackfish.SwordAndStone.Services;
 
+import com.alexbackfish.SwordAndStone.Entities.WebUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -56,7 +57,14 @@ public class JWTService {
     }
 
     public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+        Map<String, Object> claims = new HashMap<>();
+        // Assuming WebUser has a method getId() to get the user ID.
+        // Cast UserDetails to WebUser and extract the ID.
+        if (userDetails instanceof WebUser) {
+            WebUser webUser = (WebUser) userDetails;
+            claims.put("userId", webUser.getId()); // Include the user ID in the claims
+        }
+        return generateToken(claims, userDetails);
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {

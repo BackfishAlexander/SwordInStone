@@ -2,6 +2,7 @@ package com.alexbackfish.SwordAndStone.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +16,7 @@ public class Campaign {
 
     private String campaignName;
     private String campaignDescription;
+    private String URL;
     // Additional fields related to the Campaign entity
 
     @JsonIgnore
@@ -25,10 +27,43 @@ public class Campaign {
     @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PlayerCharacter> playerCharacters = new HashSet<>();
 
+    @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Shop> shops = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "campaign_members",
+            joinColumns = @JoinColumn(name = "campaign_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private final Set<WebUser> members = new HashSet<>();
+
     public Campaign() {
     }
 
-    // Getters and setters for all fields
+    public Set<Shop> getShops() {
+        return shops;
+    }
+
+    public void addShop(Shop shop) {
+        this.shops.add(shop);
+    }
+
+    public void addMember(WebUser user) {
+        this.members.add(user);
+    }
+
+    public void removeMember(WebUser user) {
+        this.members.remove(user);
+    }
+
+    public Set<WebUser> getMembers() {
+        return this.members;
+    }
+
+    public boolean isMember(WebUser user) {
+        return this.members.contains(user);
+    }
 
     public Set<PlayerCharacter> getPlayerCharacters() {
         return playerCharacters;
@@ -53,6 +88,14 @@ public class Campaign {
 
     public void setCampaignName(String campaignName) {
         this.campaignName = campaignName;
+    }
+
+    public String getURL() {
+        return URL;
+    }
+
+    public void setURL(String URL) {
+        this.URL = URL;
     }
 
     public WebUser getUser() {

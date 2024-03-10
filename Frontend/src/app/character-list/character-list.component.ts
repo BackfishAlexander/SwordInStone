@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PlayerCharacter } from '../DTOs/PlayerCharacter';
 import { CookieService } from 'ngx-cookie-service';
+import { UtilsService } from '../services/utils.service';
 
 @Component({
   selector: 'app-character-list',
@@ -15,12 +16,16 @@ export class CharacterListComponent implements OnInit {
   characters: any;
   isCreateCharacterModalOpen: boolean = false;
   createButtonOn: boolean = false;
+  fullView: boolean = false;
+  statToPlus = this.utilsService.statToPlus;
+  selectedCharacter: PlayerCharacter | null = null;
   @Input() type: string = "none";
 
   constructor(
     private route: ActivatedRoute,
     private campaignService: CampaignService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private utilsService: UtilsService
         ) 
         {}
 
@@ -36,12 +41,16 @@ export class CharacterListComponent implements OnInit {
     // this.cd.detectChanges();
   }
 
+  onCharacterClick(character: PlayerCharacter): void {
+    this.selectedCharacter = character;
+    // Further logic can be added here if needed
+  }
+
   ngOnInit(): void {
     // console.log("Initializing character list of type: " + this.type);
 
-
-    if (!this.type.toLowerCase().includes("no-button")) {
-      this.createButtonOn = true;
+    if (this.type.toLowerCase().includes("full-view")) {
+      this.fullView = true;
     }
 
     if (this.type.toLowerCase().includes("campaign")){
@@ -54,6 +63,9 @@ export class CharacterListComponent implements OnInit {
               data.playerCharacters.sort((a: PlayerCharacter, b: PlayerCharacter) => a.characterName.localeCompare(b.characterName));
             }
             this.characters = data.playerCharacters;
+            if (!this.type.toLowerCase().includes("no-button")) {
+              this.createButtonOn = true;
+            }
           },
           (error) => {
             console.error('Error fetching campaign data:', error);
@@ -71,6 +83,9 @@ export class CharacterListComponent implements OnInit {
               data.sort((a: PlayerCharacter, b: PlayerCharacter) => a.characterName.localeCompare(b.characterName));
             }
             this.characters = data;
+            if (!this.type.toLowerCase().includes("no-button")) {
+              this.createButtonOn = true;
+            }
           },
           (error) => {
             console.error('Error fetching campaign data:', error);

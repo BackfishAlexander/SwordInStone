@@ -7,8 +7,8 @@ import { AuthenticationService } from './authentication.service';
   providedIn: 'root'
 })
 export class CampaignService {
-  private baseUrl = 'http://localhost:8080/private/campaign/view/';
-  private playerCList = 'http://localhost:8080/private/user/playerlist/';
+  private baseUrl = 'http://' + this.auth.getBackendIP() + ':8080/private/campaign/view/';
+  private playerCList = 'http://' + this.auth.getBackendIP() + ':8080/private/user/playerlist/';
 
   constructor(private http: HttpClient, private auth: AuthenticationService) {
   }

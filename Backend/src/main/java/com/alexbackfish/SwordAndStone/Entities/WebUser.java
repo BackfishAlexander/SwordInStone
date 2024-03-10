@@ -1,6 +1,7 @@
 package com.alexbackfish.SwordAndStone.Entities;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,8 +32,9 @@ public class WebUser implements UserDetails {
     private Role role;
 
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany(mappedBy = "members")
     private final Set<Campaign> campaigns = new HashSet<>();
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private final Set<PlayerCharacter> playerCharacters = new HashSet<>();
 
@@ -64,16 +66,14 @@ public class WebUser implements UserDetails {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
+    @Transactional
+    public Set<Campaign> getCampaigns() {
+        return campaigns;
+    }
 
-
-
-
-
-
-//     Method to add a campaign to the user
+    //     Method to add a campaign to the user
     public void addCampaign(Campaign campaign) {
         campaigns.add(campaign);
-        campaign.setUser(this);
     }
 
     // Method to remove a campaign from the user
