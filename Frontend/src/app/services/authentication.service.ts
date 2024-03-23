@@ -5,5 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class AuthenticationService {
 
+
+  generatePayload(username: String, password: String) {
+    return ({
+      username: username,
+      password: password,
+            })
+  }
+
   constructor() { }
 }
