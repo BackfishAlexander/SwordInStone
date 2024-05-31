@@ -1,0 +1,9 @@
+/* notification.component.css */
+.alert {
+    position: absolute;
+    max-width: 80%;
+    left: 10%;
+    bottom: 10px;
+    z-index: 100;
+}
+  

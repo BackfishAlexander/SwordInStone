@@ -3,14 +3,38 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TestComponent } from './pages/test/test.component';
+import { FormsModule } from '@angular/forms'; // Import FormsModule here
+import { HttpClientModule } from '@angular/common/http';
+import { LandingComponent } from './pages/landing/landing.component';
+import { LogoComponent } from './components/logo/logo.component';
+import { ErrorComponent } from './pages/error/error.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { HomeComponent } from './pages/home/home.component';
+import { NotificationComponent } from './components/notification/notification.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { CampaignComponent } from './pages/campaign/campaign.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TestComponent,
+    LandingComponent,
+    LogoComponent,
+    ErrorComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
+    NotificationComponent,
+    NavbarComponent,
+    CampaignComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

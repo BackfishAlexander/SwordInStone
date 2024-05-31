@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -256,5 +257,24 @@ public class CampaignController {
         userRepository.save(user);
 
         return new ResponseEntity<>("Campaign left successfully", HttpStatus.OK);
+    }
+
+
+    @GetMapping("/public/dndbeyond/{id}")
+    public ResponseEntity<String> fetchCharacter(@PathVariable String id) {
+        System.out.println("FETCHING: " + id);
+        // Directly instantiate RestTemplate here
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "https://character-service.dndbeyond.com/character/v5/character/" + id + "?includeCustomItems=true";
+
+        try {
+            // Use RestTemplate to fetch data from the external API
+            String response = restTemplate.getForObject(url, String.class);
+            // Return the fetched data as the response body
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            // Handle exceptions by returning an internal server error response
+            return ResponseEntity.internalServerError().body("Failed to fetch data from DnDBeyond: " + e.getMessage());
+        }
     }
 }

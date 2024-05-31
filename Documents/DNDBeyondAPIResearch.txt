@@ -1,0 +1,14 @@
+{
+	id: number
+	data: {
+		stats: []
+		bonusStats: []
+		overrideStats: []
+	}
+}
+
+Initially takes `stats`. Adds `bonusStats` 
+
+Next is going to add whatever obscure RACIAL PROCESS
+
+Finally takes overrideStats and replaces any nonNull override stats

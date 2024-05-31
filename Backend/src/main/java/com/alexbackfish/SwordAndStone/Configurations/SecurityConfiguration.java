@@ -40,6 +40,7 @@ public class SecurityConfiguration {
 //                .requestMatchers("/default").permitAll()
 //                .requestMatchers("/private/**").permitAll()
                 .requestMatchers("/test").permitAll()
+                .requestMatchers("/public/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement((sessionManagement) ->

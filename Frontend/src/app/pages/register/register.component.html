@@ -1,0 +1,48 @@
+<div class="min-h-screen flex items-center justify-center">
+    <div class="w-full bg-neutral max-w-md rounded-lg shadow-md p-6">
+      <h2 class="text-2xl font-semibold text-white text-center">Register</h2>
+      <p class="mt-2 text-center">Create new account</p>
+      <form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="mt-4">
+        <div class="flex flex-col mb-4">
+          <label
+            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-300"
+            for="login"
+          >
+            Email
+          </label>
+          <input
+            class="flex h-10 w-full border border-input text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            type="text"
+            id="login"
+            name="login"
+            placeholder="Enter your email"
+            required=""
+            [(ngModel)]="registerData.username"
+          />
+        </div>
+        <div class="flex flex-col mb-6">
+          <label
+            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-300"
+            for="password"
+          >
+            Password
+          </label>
+          <input
+            class="flex h-10 w-full border border-input text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required=""
+            [(ngModel)]="registerData.password"
+          />
+        </div>
+        <button
+          class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 w-full py-2 px-4 bg-info text-white rounded-md hover:bg-indigo-300 hover:text-black"
+          type="submit"
+        >
+          Register
+        </button>
+      </form>
+    </div>
+  </div>
