@@ -1,3 +1,39 @@
 <app-navbar></app-navbar>
 
-<p>campaign works!</p>
+<div class="flex items-center justify-center flex-auto flex-col">
+    <h1 class="text-center text-5xl font-bold mt-1">The Gooners</h1>
+    <h2 class="text-center text-1xl mb-3">Campaign</h2>
+    <div role="tablist" class="tabs tabs-bordered max-w-96">
+        <a role="tab" class="tab" (click)="tabClick(1);" [class.tab-active]="activeTab === 1" [class.opacity-25]="activeTab !== 1">Tab 1</a>
+        <a role="tab" class="tab" (click)="tabClick(2);" [class.tab-active]="activeTab === 2" [class.opacity-25]="activeTab !== 2">Overview</a>
+        <a role="tab" class="tab" (click)="tabClick(3);" [class.tab-active]="activeTab === 3" [class.opacity-25]="activeTab !== 3">Shops</a>
+    </div>
+</div>
+
+<div *ngIf="activeTab === 1" class="w-64 h-64 absolute" @fadeInOut>
+    This is tab 1
+</div>
+
+<div *ngIf="activeTab === 3" class="w-64 h-64 absolute" @fadeInOut>
+    This is the Shop tab
+</div>
+
+<div id="Overview Page Content" *ngIf="activeTab === 2" class="flex flex-col justify-between w-full mt-4 h-full md:flex-row" @fadeInOut>
+    <div id="Characters" class="flex-1 md:mr-10 mb-2">
+
+        <app-character-pill
+            *ngFor="let character of characters"
+            [character]="character">
+        </app-character-pill>
+
+    </div>
+
+    <!-- Side Bar Divs -->
+    <div class="flex flex-col ml-1">
+
+        <app-player-list
+        [playerlist]="playerlist"
+        ></app-player-list>
+
+    </div>
+</div>

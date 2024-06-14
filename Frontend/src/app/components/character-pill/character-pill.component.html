@@ -1,0 +1,28 @@
+<!-- Individual Characters start here -->
+<div id="Character" class="bg-base-200 rounded-full p-3 m-2 border-base-200 border flex flex-row">
+    <div id="character-image" class="avatar">
+        <div class="w-24 rounded-full">
+          <img [src]="character.url" />
+        </div>
+    </div>
+    <div id="character-name-race-level" class="ml-5 mt-1 flex flex-col">
+        <h1 class="text-3xl text-gray-50 font-light md:text-5xl">{{ character.name }}</h1>
+        <h2 class="text-sm text-gray-300 font-light mt-1 ml-2 md:text-lg">{{ character.description }}</h2>
+    </div>
+    <div id="right-anchor-icons" class="flex ml-auto">
+
+        <div class="mt-auto mb-auto">
+            <div class="tooltip tooltip-left" [attr.data-tip]="character.gp + ' GP'">
+                <div class="font-bold text-yellow-600 rounded-full radial-progress mt-auto mb-auto mr-5 bg-base-100" role="progressbar" style="--value:100; --thickness: 4px;">{{ character.gp }} GP</div>
+            </div>
+        </div>
+
+        <div class="mt-auto mb-auto">
+            <div class="tooltip tooltip-left" [attr.data-tip]="character.hp +' / ' + character.maxhp + ' HP'">
+                <div class="font-bold text-red-600 rounded-full radial-progress mt-auto mb-auto mr-5 bg-base-100" role="progressbar" [style.--value]="(character.hp / character.maxhp) * 100" style="--thickness: 4px;">{{ character.hp }} HP</div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

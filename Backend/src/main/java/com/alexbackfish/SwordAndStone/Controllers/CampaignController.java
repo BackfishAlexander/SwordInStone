@@ -92,12 +92,12 @@ public class CampaignController {
     }
 
 
-    @PostMapping("/private/campaign/join")
+    @PostMapping(value = "/private/campaign/join", produces = { MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<?> joinCampaign(@RequestBody JoinCampaignDTO formData) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         System.out.println("JOINING CAMPAIGN");
         Optional<WebUser> userOptional = userRepository.findByUsername(username);
-        Optional<Campaign> campaignOptional = campaignRepository.findById(formData.getCampaignId());
+        Optional<Campaign> campaignOptional = campaignRepository.findByURL(formData.getCampaignURL());
 
         if(!userOptional.isPresent()) {
             return new ResponseEntity<>("Username doesn't exist!", HttpStatus.BAD_REQUEST);

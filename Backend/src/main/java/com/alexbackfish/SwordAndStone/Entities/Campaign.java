@@ -16,6 +16,7 @@ public class Campaign {
 
     private String campaignName;
     private String campaignDescription;
+    @Column(unique = true)
     private String URL;
     // Additional fields related to the Campaign entity
 

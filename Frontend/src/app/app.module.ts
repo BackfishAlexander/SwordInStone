@@ -15,6 +15,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CampaignComponent } from './pages/campaign/campaign.component';
+import { CharacterPillComponent } from './components/character-pill/character-pill.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PlayerListComponent } from './components/player-list/player-list.component';
+import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
@@ -29,12 +33,16 @@ import { CampaignComponent } from './pages/campaign/campaign.component';
     NotificationComponent,
     NavbarComponent,
     CampaignComponent,
+    CharacterPillComponent,
+    PlayerListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ClipboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

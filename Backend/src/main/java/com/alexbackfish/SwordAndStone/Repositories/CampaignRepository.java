@@ -8,4 +8,7 @@ import java.util.Optional;
 public interface CampaignRepository extends JpaRepository<Campaign, Long> {
     @Override
     Optional<Campaign> findById(Long aLong);
+
+
+    Optional<Campaign> findByURL(String URL);
 }

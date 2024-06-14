@@ -1,16 +1,16 @@
 package com.alexbackfish.SwordAndStone.DTOs;
 
 public class JoinCampaignDTO {
-    private Long campaignId;
+    private String campaignURL;
 
     public JoinCampaignDTO() {
     }
 
-    public Long getCampaignId() {
-        return campaignId;
+    public String getCampaignURL() {
+        return campaignURL;
     }
 
-    public void setCampaignId(Long campaignId) {
-        this.campaignId = campaignId;
+    public void setCampaignURL(String campaignId) {
+        this.campaignURL = campaignId;
     }
 }
