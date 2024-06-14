@@ -1,0 +1,148 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id        String @id @default(uuid()) @db.Uuid
+
+  username  String   @unique
+  password  String
+  role      Role     @default(USER)
+  
+  bio       String?  @default("No user bio")
+  avatarURL String   @default("default")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  campaigns CampaignUsers[]
+  createdItems Item[] @relation("UserCreatedItems")
+}
+
+model Campaigns {
+  id          String @id @default(uuid()) @db.Uuid
+  name        String
+  description String
+
+  members     CampaignUsers[]
+  characters  Characters[]
+  shops       Shop[]
+}
+
+model Characters {
+  id          String @id @default(uuid()) @db.Uuid
+
+  name        String
+  description String? @default("No description")
+  avatarURL   String  @default("https://www.dndbeyond.com/avatars/40939/576/1581111423-121855753.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp")
+
+  campaign    Campaigns @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  campaignId  String @db.Uuid
+
+  inventory   Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+  inventoryId String @db.Uuid @unique
+
+  STR         Int
+  DEX         Int
+  CON         Int
+  WIS         Int
+  INT         Int
+  CHA         Int
+
+  GP          Int
+  SP          Int
+  CP          Int
+
+  HP          Int
+  maxHP       Int
+
+  AC          Int
+  walkingSpeed Int
+}
+
+model CampaignUsers {
+  campaignId String @db.Uuid
+  userId     String @db.Uuid
+
+  campaign  Campaigns @relation(fields: [campaignId], references: [id])
+
+  user      Users     @relation(fields: [userId], references: [id])
+
+  @@id([campaignId, userId])
+  @@unique([campaignId, userId])
+}
+
+model Inventory {
+  id         String @id @default(uuid()) @db.Uuid
+  items      InventoryItem[]
+  shop       Shop?
+  character  Characters?
+}
+
+model Item {
+  id          String @id @default(uuid()) @db.Uuid
+
+  name        String
+  description String?
+  url         String @default("default")
+  type        ItemType
+
+  goldCost    Int?
+  silverCost  Int?
+  copperCost  Int?
+
+  goldValue   Int?
+  silverValue Int?
+  copperValue Int?
+
+  inventories InventoryItem[]
+
+  creatorId   String?  @db.Uuid
+  creator     Users?   @relation("UserCreatedItems", fields: [creatorId], references: [id])
+}
+
+model InventoryItem {
+  itemId       String @db.Uuid
+  inventoryId  String @db.Uuid
+
+  inventory    Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+  item         Item      @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@id([inventoryId, itemId])
+  @@unique([inventoryId, itemId])
+}
+
+model Shop {
+  id          String @id @default(uuid()) @db.Uuid
+  name        String
+  description String
+  campaignId  String @db.Uuid
+  inventoryId String @db.Uuid @unique
+
+  campaign    Campaigns @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  inventory   Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum ItemType {
+  HELMET
+  MASK
+  CHESTPIECE
+  GAUNTLET
+  GLOVE
+  PANTS
+  BOOTS
+  ACCESSORY
+  JEWELRY
+  WEAPON
+  ARTIFACT
+}
