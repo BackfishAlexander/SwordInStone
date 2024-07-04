@@ -27,6 +27,14 @@ export class UsersService {
     })
   }
 
+  async findByUsername(username: string) {
+    return this.databaseService.users.findUnique({
+      where: {
+        username: username,
+      }
+    })
+  }
+
   async update(id: string, updateUserDto: Prisma.UsersUpdateInput) {
     return this.databaseService.users.update({
       where: {

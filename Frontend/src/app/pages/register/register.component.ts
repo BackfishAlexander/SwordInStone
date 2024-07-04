@@ -1,24 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   registerData = {
     username: '',
     password: ''
   };
+  loading = false;
 
-  constructor(private auth: AuthenticationService) {
-
+  ngOnInit(): void {
+      this.auth.logout(false);
   }
 
-  onSubmit() {
-    // console.log('Username:', this.registerData.username);
-    // console.log('Password:', this.registerData.password);
-    this.auth.register(this.registerData.username, this.registerData.password);
+  constructor(
+    private auth: AuthenticationService, 
+    private router: Router,
+    private notificationService: NotificationService
+  ) {
+  }
+
+   onSubmit() {
+    this.loading = true;
+    this.auth.register(this.registerData.username, this.registerData.password).subscribe(
+      response => {
+        this.loading = false;
+        this.router.navigate(['/home']);
+        // Handle successful login if needed
+      },
+      error => {
+        this.loading = false;
+        this.notificationService.showNotification("Error registering account.", "error");
+        // Error is already handled in the service
+      }
+    );
   }
 }

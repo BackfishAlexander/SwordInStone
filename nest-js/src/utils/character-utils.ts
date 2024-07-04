@@ -1,4 +1,4 @@
-import { DNDBeyondCharacter, StatList } from "../interfaces/DNDBeyondCharacter";
+import { DNDBeyondCharacter, StatList } from "src/interfaces/DNDBeyondCharacter";
 
 enum Stat {
     STR,

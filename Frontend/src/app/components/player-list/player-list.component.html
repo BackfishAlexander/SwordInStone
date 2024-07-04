@@ -1,13 +1,13 @@
 <div id="PlayerList" class="mb-2 flex-1">
-    <div class="left-auto right-auto bg-base-200 p-4 pt-4 pb-5 mr-4 rounded-xl flex flex-col justify-center">
+    <div class="left-auto right-auto bg-base-200 p-3 pt-2 pb-3 mr-4 rounded-xl flex flex-col justify-center">
         <h1 class="text-center font-bold mb-2">Player List</h1>
         <div class="bg-base-300 flex flex-col justify-start p-4 rounded-xl mb-3">
 
 
             <div *ngFor="let player of playerlist.players">
-                <div *ngIf="player.role=='DM'" class="badge badge-error dm-badge">DM</div>
-                <div *ngIf="player.role=='PLAYER'" class="badge badge-neutral player-badge">Player</div>
-                {{player.name}}
+                <div *ngIf="player.role=='DM'" class="badge badge-error dm-badge select-none">DM</div>
+                <div *ngIf="player.role=='PLAYER'" class="badge badge-neutral player-badge select-none">Player</div>
+                {{player.username}}
             </div>
 
         </div>

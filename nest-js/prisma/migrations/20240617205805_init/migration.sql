@@ -23,6 +23,7 @@ CREATE TABLE "Campaigns" (
     "id" UUID NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
+    "ownerId" UUID NOT NULL,
 
     CONSTRAINT "Campaigns_pkey" PRIMARY KEY ("id")
 );
@@ -34,20 +35,24 @@ CREATE TABLE "Characters" (
     "description" TEXT DEFAULT 'No description',
     "avatarURL" TEXT NOT NULL DEFAULT 'https://www.dndbeyond.com/avatars/40939/576/1581111423-121855753.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp',
     "campaignId" UUID NOT NULL,
+    "ownerId" UUID NOT NULL,
     "inventoryId" UUID NOT NULL,
-    "STR" INTEGER NOT NULL,
-    "DEX" INTEGER NOT NULL,
-    "CON" INTEGER NOT NULL,
-    "WIS" INTEGER NOT NULL,
-    "INT" INTEGER NOT NULL,
-    "CHA" INTEGER NOT NULL,
-    "GP" INTEGER NOT NULL,
-    "SP" INTEGER NOT NULL,
-    "CP" INTEGER NOT NULL,
-    "HP" INTEGER NOT NULL,
-    "maxHP" INTEGER NOT NULL,
-    "AC" INTEGER NOT NULL,
-    "walkingSpeed" INTEGER NOT NULL,
+    "race" TEXT,
+    "level" INTEGER,
+    "class" TEXT,
+    "STR" INTEGER NOT NULL DEFAULT 10,
+    "DEX" INTEGER NOT NULL DEFAULT 10,
+    "CON" INTEGER NOT NULL DEFAULT 10,
+    "WIS" INTEGER NOT NULL DEFAULT 10,
+    "INT" INTEGER NOT NULL DEFAULT 10,
+    "CHA" INTEGER NOT NULL DEFAULT 10,
+    "GP" INTEGER NOT NULL DEFAULT 0,
+    "SP" INTEGER,
+    "CP" INTEGER,
+    "HP" INTEGER NOT NULL DEFAULT 1,
+    "maxHP" INTEGER NOT NULL DEFAULT 1,
+    "AC" INTEGER,
+    "walkingSpeed" INTEGER NOT NULL DEFAULT 30,
 
     CONSTRAINT "Characters_pkey" PRIMARY KEY ("id")
 );
@@ -100,6 +105,7 @@ CREATE TABLE "Shop" (
     "description" TEXT NOT NULL,
     "campaignId" UUID NOT NULL,
     "inventoryId" UUID NOT NULL,
+    "enabled" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Shop_pkey" PRIMARY KEY ("id")
 );
@@ -120,7 +126,13 @@ CREATE UNIQUE INDEX "InventoryItem_inventoryId_itemId_key" ON "InventoryItem"("i
 CREATE UNIQUE INDEX "Shop_inventoryId_key" ON "Shop"("inventoryId");
 
 -- AddForeignKey
+ALTER TABLE "Campaigns" ADD CONSTRAINT "Campaigns_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Characters" ADD CONSTRAINT "Characters_campaignId_fkey" FOREIGN KEY ("campaignId") REFERENCES "Campaigns"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Characters" ADD CONSTRAINT "Characters_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "Users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Characters" ADD CONSTRAINT "Characters_inventoryId_fkey" FOREIGN KEY ("inventoryId") REFERENCES "Inventory"("id") ON DELETE CASCADE ON UPDATE CASCADE;

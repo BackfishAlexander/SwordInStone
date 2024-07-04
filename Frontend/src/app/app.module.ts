@@ -3,9 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TestComponent } from './pages/test/test.component';
 import { FormsModule } from '@angular/forms'; // Import FormsModule here
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LandingComponent } from './pages/landing/landing.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { ErrorComponent } from './pages/error/error.component';
@@ -19,11 +18,16 @@ import { CharacterPillComponent } from './components/character-pill/character-pi
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlayerListComponent } from './components/player-list/player-list.component';
 import { ClipboardModule } from 'ngx-clipboard';
+import { LogoutComponent } from './pages/logout/logout.component';
+import { AuthInterceptorService } from './Interceptors/auth-interceptor.service';
+import { CampaignBoxComponent } from './components/campaign-box/campaign-box.component';
+import { InviteComponent } from './pages/invite/invite.component';
+import { CreateImportCharComponent } from './components/create-import-char/create-import-char.component';
+import { CharacterSheetComponent } from './components/character-sheet/character-sheet.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent,
     LandingComponent,
     LogoComponent,
     ErrorComponent,
@@ -35,6 +39,11 @@ import { ClipboardModule } from 'ngx-clipboard';
     CampaignComponent,
     CharacterPillComponent,
     PlayerListComponent,
+    LogoutComponent,
+    CampaignBoxComponent,
+    InviteComponent,
+    CreateImportCharComponent,
+    CharacterSheetComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +53,9 @@ import { ClipboardModule } from 'ngx-clipboard';
     BrowserAnimationsModule,
     ClipboardModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

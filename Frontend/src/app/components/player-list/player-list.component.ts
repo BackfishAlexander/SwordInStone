@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ClipboardService } from 'ngx-clipboard';
+import { playerList } from 'src/app/pages/campaign/campaign.component';
 
 @Component({
   selector: 'app-player-list',
@@ -7,13 +8,14 @@ import { ClipboardService } from 'ngx-clipboard';
   styleUrls: ['./player-list.component.css']
 })
 export class PlayerListComponent {
-  @Input() playerlist: any;
+  @Input() playerlist!: playerList;
 
   constructor(private _clipboardService: ClipboardService) {
 
   }
 
   copyInvite() {
-    this._clipboardService.copy(this.playerlist.inviteurl);
+    console.log('copying ' + this.playerlist.url);
+    this._clipboardService.copy(this.playerlist.url);
   }
 }

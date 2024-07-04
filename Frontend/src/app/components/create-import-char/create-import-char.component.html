@@ -1,0 +1,35 @@
+<div id="Character" class="bg-base-200 rounded-full p-3 m-2 border-base-200 border flex flex-col">
+    <h1 class="text-lg text-center font-bold mb-1">No character in campaign</h1>
+    <div class="ml-auto mr-auto mt-auto mb-auto p-1">
+        <button onclick="create_character_modal.showModal()" class="btn bg-blue-600 text-white mx-2">Create Character</button>
+        <button onclick="import_character_modal.showModal()" class="btn bg-green-600 text-white mx-2">Import Character</button>
+    </div>
+</div>
+
+
+<dialog id="create_character_modal" class="modal">
+    <div class="modal-box min-w-96">
+    <h3 class="font-bold text-lg mb-2">Create Character Manually</h3>
+    <p>Currently, manual character creation is not supported. Please use the DNDBeyond import tool.</p>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+      <button>close</button>
+    </form>
+</dialog>
+
+
+<dialog id="import_character_modal" class="modal">
+    <div class="modal-box min-w-96">
+      <h3 class="font-bold text-lg mb-2">Import Character from DNDBeyond</h3>
+        <input type="text" [(ngModel)]="importCharacterURL" id="importCharacterURL" name="importCharacterURL" placeholder="Enter dndbeyond url..." class="mt-1 mb-2 p-2 block w-full bg-transparent border-0 focus:outline-none">
+        <div class="flex justify-center">
+            <button [disabled]="importLoading" (click)="importCharacter()" class="btn bg-blue-500 text-white w-52">
+                <span *ngIf="importLoading" class="loading loading-spinner"></span>
+                Create
+            </button>
+        </div>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+      <button>close</button>
+    </form>
+</dialog>

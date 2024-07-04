@@ -22,12 +22,17 @@ model Users {
 
   campaigns CampaignUsers[]
   createdItems Item[] @relation("UserCreatedItems")
+  ownedCampaigns Campaigns[] @relation("CampaignOwner")
+  ownedCharacters Characters[]
 }
 
 model Campaigns {
   id          String @id @default(uuid()) @db.Uuid
   name        String
   description String
+
+  ownerId     String @db.Uuid
+  owner       Users @relation("CampaignOwner", fields: [ownerId], references: [id])
 
   members     CampaignUsers[]
   characters  Characters[]
@@ -44,25 +49,32 @@ model Characters {
   campaign    Campaigns @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   campaignId  String @db.Uuid
 
+  owner       Users @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId     String @db.Uuid
+
   inventory   Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
   inventoryId String @db.Uuid @unique
 
-  STR         Int
-  DEX         Int
-  CON         Int
-  WIS         Int
-  INT         Int
-  CHA         Int
+  race        String?
+  level       Int?
+  class       String?
 
-  GP          Int
-  SP          Int
-  CP          Int
+  STR         Int @default(10)
+  DEX         Int @default(10)
+  CON         Int @default(10)
+  WIS         Int @default(10)
+  INT         Int @default(10)
+  CHA         Int @default(10)
 
-  HP          Int
-  maxHP       Int
+  GP          Int @default(0)
+  SP          Int?
+  CP          Int?
 
-  AC          Int
-  walkingSpeed Int
+  HP          Int @default(1)
+  maxHP       Int @default(1)
+
+  AC          Int? 
+  walkingSpeed Int  @default(30) //DND walking speed
 }
 
 model CampaignUsers {
@@ -123,6 +135,7 @@ model Shop {
   description String
   campaignId  String @db.Uuid
   inventoryId String @db.Uuid @unique
+  enabled     Boolean @default(false)
 
   campaign    Campaigns @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   inventory   Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)

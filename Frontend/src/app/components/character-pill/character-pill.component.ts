@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { playerCharacter } from 'src/app/dtos/campaigns';
 
 @Component({
   selector: 'app-character-pill',
@@ -6,5 +7,12 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./character-pill.component.css']
 })
 export class CharacterPillComponent {
-  @Input() character: any;
+  @Input() character!: playerCharacter;
+  @ViewChild('modal') modal!: ElementRef<HTMLElement>;
+
+  openModal() {
+    if (this.modal && this.modal.nativeElement) {
+      (this.modal.nativeElement as any).showModal();
+    }
+  }
 }

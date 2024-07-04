@@ -13,6 +13,17 @@ export interface DNDBeyondCharacter {
         };
         inventory: InventoryItem;
         modifiers: Modifiers;
+        decorations: {
+            avatarUrl: string;
+        };
+        currencies: {
+            cp: number;
+            sp: number;
+            gp: number;
+            ep: number;
+            pp: number;
+        };
+        classes: Array<classes>;
     }
 }
 
@@ -29,6 +40,13 @@ interface Stat {
     id: number;
     name: string;
     value: number;
+}
+
+interface classes {
+    level: number;
+    definition: {
+        name: string;
+    }
 }
 
 interface InventoryItem {

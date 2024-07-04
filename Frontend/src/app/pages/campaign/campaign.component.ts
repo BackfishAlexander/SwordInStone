@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Input as RouteParam } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { campaignDetailed, playerCharacter } from 'src/app/dtos/campaigns';
+import { HttpService } from 'src/app/services/http.service';
+import { endpointList } from 'src/environments/endpoint-list';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-campaign',
@@ -24,52 +28,38 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 export class CampaignComponent {
   @RouteParam() id: string = '';
   activeTab = 2;
+  campaignData!: campaignDetailed;
+  loading = true;
 
-  characters = [
-    { name: 'Quintus Vale', 
-    description: 'Level 4 Human Wizard', 
-    url: "https://www.dndbeyond.com/avatars/40939/576/1581111423-121855753.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp",
-    gp: "14",
-    hp: 11,
-    maxhp: 18
-  },
-    { name: 'Radomir Vale', 
-    description: 'Level 4 Human Sorcerer', 
-    url: "https://www.dndbeyond.com/avatars/41315/361/1581111423-115681234.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp",
-    gp: "22",
-    hp: 19,
-    maxhp: 20 
-  },
-    // Add more characters as needed
-  ];
+  characters: playerCharacter[] = [];
 
 
-  playerlist = {
-    players: [
-      {
-        name: "GavinS",
-        role: "DM"
-      },
-      {
-        name: "LiterallyAlex",
-        role: "PLAYER"
-      },
-      {
-        name: "Phillim1111",
-        role: "PLAYER"
-      },
-      {
-        name: "TheLifeOfDustin",
-        role: "PLAYER"
-      }
-    ],
-    inviteurl: "www.google.com"
+  playerlist: playerList = {
+    players: [],
+    url: ""
   };
 
   // campaignId: any;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(
+    private route: ActivatedRoute,
+    private httpService: HttpService,
+    private auth: AuthenticationService
+  ) {
 
+  }
+
+  showCreateButton(): boolean {
+    let id = this.auth.getId();
+    if (id == this.campaignData.ownerId) {
+      return false;
+    }
+    for (let c of this.characters) {
+      if (c.ownerId == id) {
+        return false;
+      }
+    }
+    return true;
   }
 
   tabClick(tabNumber: number) {
@@ -77,23 +67,53 @@ export class CampaignComponent {
   }
 
   ngOnInit(): void {
-    // this.route.params.subscribe(params => {
-    //   this.campaignId = params['id']; // Get the id from the route parameter
-    //   // document.write(this.campaignId);
-    //   console.log(this.campaignId);
-    //   // this.campaignService.getCampaign(this.campaignId).subscribe(
-    //   //   (data) => {
-    //   //     // Sort player characters by name in alphabetical order
-    //   //     if (data.playerCharacters) {
-    //   //       data.playerCharacters.sort((a: PlayerCharacter, b: PlayerCharacter) => a.characterName.localeCompare(b.characterName));
-    //   //     }
-    //   //     this.campaign = data;
-    //   //   },
-    //   //   (error) => {
-    //   //     console.error('Error fetching campaign data:', error);
-    //   //   }
-    //   // );
-    // });
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      let id = params.get('id');
+      if (id != null) {
+        this.id = id;
+      }
+      else {
+        throw new Error('Could not fetch campaign');
+      }
+    });
+
+    this.httpService.getRequest<campaignDetailed>(this.httpService.buildURL(`${endpointList.campaigns}/${this.id}`), "json").then(
+      (
+        response => {
+        this.campaignData = response;
+
+        console.log(this.campaignData);
+
+        for (let playerCharacter of this.campaignData.characters) {
+          this.characters.push(playerCharacter);
+        }
+
+        // this.playerlist.url = "localhost:4200/invite/" + this.id;
+        this.playerlist.url = "/invite/" + this.id;
+    
+        for (let player of this.campaignData.members) {
+          if (this.campaignData.ownerId == player.user.id) {
+            this.playerlist.players.push({username: player.user.username, role:"DM"});
+          }
+          else {
+            this.playerlist.players.push({username: player.user.username, role:"PLAYER"});
+          }
+        }
+        this.loading = false;
+      }
+    )
+    );
   }
 
+}
+
+
+export interface playerList {
+  players: player[];
+  url: string;
+}
+
+export interface player {
+  username: string;
+  role: string;
 }
