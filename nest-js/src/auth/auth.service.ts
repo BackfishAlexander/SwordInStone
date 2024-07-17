@@ -7,7 +7,7 @@ import * as bcrypt from 'bcrypt';
 export class AuthService {
     constructor(
         private usersService: UsersService,
-        private jwtService: JwtService
+        private jwtService: JwtService,
     ) {}
 
     async signIn(
