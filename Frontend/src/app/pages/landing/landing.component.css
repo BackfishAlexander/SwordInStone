@@ -1,0 +1,49 @@
+.parallax {
+    position: relative;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: 1px;
+}
+
+.parallax__layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.parallax__layer--back {
+    transform: translateZ(-3px) scale(4);
+    z-index: 1;
+}
+
+.parallax__layer--middle {
+    transform: translateZ(-2px) scale(3);
+    z-index: 2;
+}
+
+.parallax__layer--text {
+    transform: translateZ(-1px) scale(2);
+    z-index: 3; /* Ensure the text is visible on top of the back layer but under the front layer */
+}
+
+.parallax__layer--front {
+    transform: translateZ(0px) scale(1);
+    z-index: 4;
+}
+
+h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 500%; /* Increased size */
+    color: #FFFFFF;
+    text-shadow: 2px 2px 4px #000000;
+    margin: 0; /* Remove margin for better control */
+    text-align: center;
+}
