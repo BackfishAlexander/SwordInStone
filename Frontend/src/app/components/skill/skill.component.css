@@ -1,0 +1,35 @@
+.no-proficiency, .proficiency, .expertise {
+    margin-right: 8px;
+}
+
+.no-proficiency {
+    width: 0.5rem /* 8px */;
+    height: 0.5rem /* 8px */;
+    border-radius: 0.5rem /* 8px */;
+    border-width: 1px;
+}
+
+.proficiency {
+    width: 0.5rem /* 8px */;
+    height: 0.5rem /* 8px */;
+    border-radius: 0.5rem /* 8px */;
+    border-width: 1px;
+    background-color: white;
+}
+
+.expertise {
+    width: 0.5rem /* 8px */;
+    height: 0.5rem /* 8px */;
+    border-radius: 0.5rem /* 8px */;
+    border-width: 2px;
+    background-color: white;
+
+    --tw-border-opacity: 1;
+    border-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-border-opacity)));
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(255 255 255 / var(--tw-ring-opacity));
+    --tw-ring-offset-width: 1px;
+}

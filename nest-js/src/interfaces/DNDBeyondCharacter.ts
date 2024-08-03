@@ -8,6 +8,9 @@ export interface DNDBeyondCharacter {
         stats: Array<Stat>;
         bonusStats: Array<Stat>;
         overrideStats: Array<Stat>;
+        baseHitPoints: number;
+        bonusHitPoints: number;
+        overrideHitPoints: number;
         race: {
             fullName: string;
         };

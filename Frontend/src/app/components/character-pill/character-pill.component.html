@@ -5,7 +5,7 @@
           <img [src]="character.avatarURL" />
         </div>
     </div>
-    <div id="character-name-race-level" (click)="openModal()" class="ml-5 mt-1 flex flex-col cursor-pointer">
+    <div id="character-name-race-level" (click)="openModal('character')" class="ml-5 mt-1 flex flex-col cursor-pointer">
         <h1 class="text-3xl text-gray-50 font-light md:text-5xl">{{ character.name }}</h1>
         <h2 class="text-sm text-gray-300 font-light mt-1 ml-2 md:text-lg">Level {{ character.level }} {{character.race}} {{character.class}}</h2>
     </div>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="mt-auto mb-auto">
-            <div class="tooltip tooltip-left" [attr.data-tip]="character.HP +' / ' + character.maxHP + ' HP'">
+            <div (click)="openModal('hp')" class="tooltip tooltip-left" [attr.data-tip]="character.HP +' / ' + character.maxHP + ' HP'">
                 <div class="font-bold text-red-600 rounded-full radial-progress mt-auto mb-auto mr-5 bg-base-100" role="progressbar" [style.--value]="(character.HP / character.maxHP) * 100" style="--thickness: 4px;">{{ character.HP }} HP</div>
             </div>
         </div>
@@ -26,7 +26,7 @@
     </div>
 </div>
 
-<dialog #modal class="modal">
+<dialog #modal id="Character Sheet" class="modal">
   <div class="modal-box">
     <h1 class="text-3xl font-bold">Character Sheet</h1>
     <hr class="h-px my-2">
@@ -34,6 +34,21 @@
   </div>
 
   <form method="dialog" class="modal-backdrop">
-    <button>close</button>
+    <button class="modal-close">close</button>
+  </form>
+</dialog>
+
+<dialog #hpModal id="HP" class="modal">
+  <div class="modal-box">
+    <input type="number" #hpInput class="input" placeholder="Enter HP" />
+
+    <div class="button-group">
+      <button type="button" class="button p-1 rounded-lg text-black bg-red-500" (click)="addHP(hpInput.value)">Heal</button>
+      <button type="button" class="button p-1 rounded-lg text-black bg-green-500" (click)="addHP('-' + hpInput.value)">Damage</button>
+    </div>
+  </div>
+
+  <form method="dialog" class="modal-backdrop">
+    <button class="modal-close">close</button>
   </form>
 </dialog>

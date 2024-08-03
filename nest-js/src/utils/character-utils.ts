@@ -65,6 +65,33 @@ export class CharacterUtils {
         return result;
     }
 
+    static calculateCharacterProficiencies(character: DNDBeyondCharacter): string[] {
+        let result = [];
+        for (let modifier of [
+            ...character.data.modifiers.race,
+            ...character.data.modifiers.class,
+            ...character.data.modifiers.background,
+            ...character.data.modifiers.feat
+        ]) {
+            if (modifier.type == "proficiency") {
+                result.push(modifier.subType);
+            }
+        }
+        return result;
+    }
 
-
+    static calculateCharacterExpertise(character: DNDBeyondCharacter): string[] {
+        let result = [];
+        for (let modifier of [
+            ...character.data.modifiers.race,
+            ...character.data.modifiers.class,
+            ...character.data.modifiers.background,
+            ...character.data.modifiers.feat
+        ]) {
+            if (modifier.type == "expertise") {
+                result.push(modifier.subType);
+            }
+        }
+        return result;
+    }
 }

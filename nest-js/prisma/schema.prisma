@@ -75,6 +75,11 @@ model Characters {
 
   AC          Int? 
   walkingSpeed Int  @default(30) //DND walking speed
+
+  proficiencies String[] @default([])
+  expertise     String[] @default([])
+
+  sheetColor    String @default("#FFFFFF")
 }
 
 model CampaignUsers {

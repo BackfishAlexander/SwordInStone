@@ -10,6 +10,8 @@
   },
   "private": true,
   "dependencies": {
+    "@3d-dice/dice-box": "^1.1.3",
+    "@3d-dice/theme-rock": "^0.2.0",
     "@angular/animations": "^16.2.0",
     "@angular/common": "^16.2.0",
     "@angular/compiler": "^16.2.0",

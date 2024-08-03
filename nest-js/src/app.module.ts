@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './auth/auth.guard';
 import { ShopsModule } from './shops/shops.module';
 import { ConfigModule } from '@nestjs/config';
+import { CharactersModule } from './characters/characters.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { ConfigModule } from '@nestjs/config';
     }]),
     AuthModule,
     ShopsModule,
+    CharactersModule,
   ],
   controllers: [AppController],
   providers: [{

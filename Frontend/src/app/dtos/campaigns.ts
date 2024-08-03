@@ -65,6 +65,9 @@ export interface playerCharacter {
   CP: number,
   HP: number,
   maxHP: number,
-  AC: number | null
-  walkingSpeed: number
+  AC: number | null,
+  walkingSpeed: number,
+  proficiencies: string[],
+  expertise: string[],
+  sheetColor: string
 }

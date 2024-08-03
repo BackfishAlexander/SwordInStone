@@ -1,31 +1,58 @@
-<div class="flex flex-row">
-    <div id="sheet-stats" class="flexflex-col">
-        <div class="p-2 px-4 my-2 bg-base-300 rounded-lg flex flex-col">
-            <h1 class="text-center font-bold">STR</h1>
-            <p class="text-center">{{character.STR}}</p>
-        </div>
-        <div class="p-2 px-4 my-2 bg-base-300 rounded-lg flex flex-col">
-            <h1 class="text-center font-bold">DEX</h1>
-            <p class="text-center">{{character.DEX}}</p>
-        </div>
-        <div class="p-2 px-4 my-2 bg-base-300 rounded-lg flex flex-col">
-            <h1 class="text-center font-bold">CON</h1>
-            <p class="text-center">{{character.CON}}</p>
-        </div>
-        <div class="p-2 px-4 my-2 bg-base-300 rounded-lg flex flex-col">
-            <h1 class="text-center font-bold">INT</h1>
-            <p class="text-center">{{character.INT}}</p>
-        </div>
-        <div class="p-2 px-4 my-2 bg-base-300 rounded-lg flex flex-col">
-            <h1 class="text-center font-bold">WIS</h1>
-            <p class="text-center">{{character.WIS}}</p>
-        </div>
-        <div class="p-2 px-4 my-2 bg-base-300 rounded-lg flex flex-col">
-            <h1 class="text-center font-bold">CHA</h1>
-            <p class="text-center">{{character.CHA}}</p>
+<div class="flex flex-col z-10">
+    <div id="name-level-health" class="flex flex-row justify-between items-center">
+        <h1 class="rounded-lg text-left font-bold">{{character.name}}</h1>
+        <div id="health" class="flex flex-row rounded-lg p-1 items-center">
+            <h2 class="text-center">Max HP: <b>{{character.maxHP}}</b></h2>
         </div>
     </div>
-    <div class="p-5 bg-green-600"></div>
-    <div class="p-5 bg-red-600"></div>
-
+    <div id="sheet-stats" class="flex flex-row justify-between mb-2">
+        <div (click)="rollD20()" class="size-16 border my-2 bg-base-300 rounded-lg flex flex-col justify-center cursor-pointer select-none relative" [ngStyle]="{'border-color': character.sheetColor}">
+            <h1 class="text-center">STR</h1>
+            <p class="text-center font-bold">{{utils.calculateModifierFromStat(character.STR)}}</p>
+            <div class="text-center absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-7 h-5 bg-base-100 outline-4 outline-black rounded-full">{{character.STR}}</div>
+        </div>
+        <div (click)="rollD20()" class="size-16 border my-2 bg-base-300 rounded-lg flex flex-col justify-center cursor-pointer select-none relative" [ngStyle]="{'border-color': character.sheetColor}">
+            <h1 class="text-center">DEX</h1>
+            <p class="text-center font-bold">{{utils.calculateModifierFromStat(character.DEX)}}</p>
+            <div class="text-center absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-7 h-5 bg-base-100 outline-4 outline-black rounded-full">{{character.DEX}}</div>
+        </div>
+        <div (click)="rollD20()" class="size-16 border my-2 bg-base-300 rounded-lg flex flex-col justify-center cursor-pointer select-none relative" [ngStyle]="{'border-color': character.sheetColor}">
+            <h1 class="text-center">CON</h1>
+            <p class="text-center font-bold">{{utils.calculateModifierFromStat(character.CON)}}</p>
+            <div class="text-center absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-7 h-5 bg-base-100 outline-4 outline-black rounded-full">{{character.CON}}</div>
+        </div>
+        <div (click)="rollD20()" class="size-16 border my-2 bg-base-300 rounded-lg flex flex-col justify-center cursor-pointer select-none relative" [ngStyle]="{'border-color': character.sheetColor}">
+            <h1 class="text-center">INT</h1>
+            <p class="text-center font-bold">{{utils.calculateModifierFromStat(character.INT)}}</p>
+            <div class="text-center absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-7 h-5 bg-base-100 outline-4 outline-black rounded-full">{{character.INT}}</div>
+        </div>
+        <div (click)="rollD20()" class="size-16 border my-2 bg-base-300 rounded-lg flex flex-col justify-center cursor-pointer select-none relative" [ngStyle]="{'border-color': character.sheetColor}">
+            <h1 class="text-center">WIS</h1>
+            <p class="text-center font-bold">{{utils.calculateModifierFromStat(character.WIS)}}</p>
+            <div class="text-center absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-7 h-5 bg-base-100 outline-4 outline-black rounded-full">{{character.WIS}}</div>
+        </div>
+        <div (click)="rollD20()" class="size-16 border my-2 bg-base-300 rounded-lg flex flex-col justify-center cursor-pointer select-none relative" [ngStyle]="{'border-color': character.sheetColor}">
+            <h1 class="text-center">CHA</h1>
+            <p class="text-center font-bold">{{utils.calculateModifierFromStat(character.CHA)}}</p>
+            <div class="text-center absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-7 h-5 bg-base-100 outline-4 outline-black rounded-full">{{character.CHA}}</div>
+        </div>
+    </div>
+    <div id="bottom" class="flex flex-row justify-between">
+        <div class="skillbox mr-1.5 p-2 w-fit bg-base-300 overflow-y-scroll border rounded-lg flex flex-col align-middle" [ngStyle]="{'border-color': character.sheetColor}">
+            <p>Skills</p>
+            <hr>
+            <app-skill *ngFor="let skill of skillList" [skill]="skill" [character]="character"></app-skill>
+        </div>
+        <div class="skillbox p-2 w-fit bg-base-300 overflow-y-scroll border rounded-lg flex flex-grow justify-center" [ngStyle]="{'border-color': character.sheetColor}">
+            <div class="flex flex-row justify-around items-center h-full">
+                <div class="bg-red-400 p-5"></div>
+                <div class="bg-blue-400 p-5"></div>
+            </div>
+            <div class="flex flex-row justify-around items-center h-full">
+                <div class="bg-yellow-400 p-5"></div>
+                <div class="bg-green-400 p-5"></div>
+            </div>
+        </div>
+    </div>
 </div>
+

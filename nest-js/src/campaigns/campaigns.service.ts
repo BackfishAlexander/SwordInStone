@@ -66,6 +66,8 @@ export class CampaignsService {
 
     try {
       const dndBeyondChar = await axios.get<DNDBeyondCharacter>(url);
+      const proficiencies = CharacterUtils.calculateCharacterProficiencies(dndBeyondChar.data);
+      const expertice = CharacterUtils.calculateCharacterExpertise(dndBeyondChar.data);
       const stats = CharacterUtils.calculateCharacterStats(dndBeyondChar.data);
       return await this.databaseService.characters.create({
         data: {
@@ -77,6 +79,8 @@ export class CampaignsService {
           INT: stats.INT,
           CON: stats.CON,
           CHA: stats.CHA,
+          HP: dndBeyondChar.data.data.baseHitPoints + (dndBeyondChar.data.data.classes[0].level * Math.floor((stats.CON - 10) / 2)),
+          maxHP: dndBeyondChar.data.data.baseHitPoints + (dndBeyondChar.data.data.classes[0].level * Math.floor((stats.CON - 10) / 2)),
           campaign: {
             connect: { id: campaign.id }
           },
@@ -92,7 +96,9 @@ export class CampaignsService {
           SP: dndBeyondChar.data.data.currencies.sp,
           CP: dndBeyondChar.data.data.currencies.cp,
           class: dndBeyondChar.data.data.classes[0].definition.name,
-          level: dndBeyondChar.data.data.classes[0].level
+          level: dndBeyondChar.data.data.classes[0].level,
+          proficiencies: proficiencies,
+          expertise: expertice,
         }
       })
     }

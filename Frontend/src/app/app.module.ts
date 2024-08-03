@@ -24,6 +24,8 @@ import { CampaignBoxComponent } from './components/campaign-box/campaign-box.com
 import { InviteComponent } from './pages/invite/invite.component';
 import { CreateImportCharComponent } from './components/create-import-char/create-import-char.component';
 import { CharacterSheetComponent } from './components/character-sheet/character-sheet.component';
+import { SkillComponent } from './components/skill/skill.component';
+import { DiceRollerComponent } from './components/dice-roller/dice-roller.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { CharacterSheetComponent } from './components/character-sheet/character-
     InviteComponent,
     CreateImportCharComponent,
     CharacterSheetComponent,
+    SkillComponent,
+    DiceRollerComponent,
   ],
   imports: [
     BrowserModule,
