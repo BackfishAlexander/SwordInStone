@@ -1,49 +1,113 @@
-.parallax {
-    position: relative;
-    height: 100vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    perspective: 1px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.parallax__layer {
+.body {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+header {
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    padding: 10px 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 2em;
+    margin-right: 270px;
+    color: #ffffff;
+    pointer-events: none;
+}
+
+.navigation a {
+    text-decoration: none;
+    color: #333333;
+    padding: 6px 15px;
+    border-radius: 20px;
+    margin: 0 10px;
+    font-weight: 600;
+}
+
+.navigation a:hover, .navigation a.is-active {
+    background: #000000;
+    color: white;
+}
+
+.parallax {
+    position: relative;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 130vh;
 }
 
-.parallax__layer--back {
-    transform: translateZ(-3px) scale(4);
-    z-index: 1;
+#text {
+    position: absolute;
+    font-size: 4em;
+    color: #ffffff;
+    top: 300px;
+    text-shadow: 10px 10px 10px rgba(0, 0, 0, .4);
 }
 
-.parallax__layer--middle {
-    transform: translateZ(-2px) scale(3);
-    z-index: 2;
+.parallax img {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    height: 130vh;
+    width: 100vw;
+    /* width: 100%; */
+
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
 }
 
-.parallax__layer--text {
-    transform: translateZ(-1px) scale(2);
-    z-index: 3; /* Ensure the text is visible on top of the back layer but under the front layer */
+.sec {
+    position: relative;
+    top: -10vh;
+    border-radius: 30px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 100px;
+    box-shadow: 3px -8px 8px rgba(0, 0, 0, 0.6);
 }
 
-.parallax__layer--front {
-    transform: translateZ(0px) scale(1);
-    z-index: 4;
+.sec h2 {
+    font-size: 3em;
+    color: #fff;
+    margin-bottom: 10px;
 }
 
-h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 500%; /* Increased size */
-    color: #FFFFFF;
-    text-shadow: 2px 2px 4px #000000;
-    margin: 0; /* Remove margin for better control */
-    text-align: center;
+.sec p {
+    font-size: 1em;
+    color: #fff;
+    font-weight: 300;
 }
+
+/* @media only screen and (min-width: 900px) {
+    .parallax img {
+        top: -400px;
+    }
+}
+
+@media only screen and (min-width: 1500px) {
+    .parallax img {
+        top: -800px;
+    }
+}
+
+@media only screen and (min-width: 2000px) {
+    .parallax img {
+        top: -1500px;
+    }
+} */
