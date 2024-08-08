@@ -7,7 +7,8 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-RUN npm run build
+# Ensure production build is used
+RUN npm run build -- --configuration=production
 
 # Step 2: Serve the Angular app using Nginx
 FROM nginx:alpine

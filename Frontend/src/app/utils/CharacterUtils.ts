@@ -34,7 +34,8 @@ export class CharacterUtils {
     static CHA_SKILLS = [
         "deception",
         "intimidation",
-        "performance"
+        "performance",
+        "persuasion"
     ]
 
     static calculateModifierFromStat(stat: number): String {
