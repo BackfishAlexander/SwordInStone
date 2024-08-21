@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Sedan+SC&family=Vast+Shadow&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -12,12 +14,8 @@
 header {
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
     padding: 10px 10px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
     z-index: 100;
 }
 
@@ -26,20 +24,6 @@ header {
     margin-right: 270px;
     color: #ffffff;
     pointer-events: none;
-}
-
-.navigation a {
-    text-decoration: none;
-    color: #333333;
-    padding: 6px 15px;
-    border-radius: 20px;
-    margin: 0 10px;
-    font-weight: 600;
-}
-
-.navigation a:hover, .navigation a.is-active {
-    background: #000000;
-    color: white;
 }
 
 .parallax {
@@ -53,10 +37,17 @@ header {
 
 #text {
     position: absolute;
-    font-size: 4em;
+    top: 50vh;
+}
+
+.landing-title {
+    font-size: 2em;
+    text-wrap: nowrap;
     color: #ffffff;
-    top: 300px;
     text-shadow: 10px 10px 10px rgba(0, 0, 0, .4);
+    font-family: "Vast Shadow", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .parallax img {
@@ -94,17 +85,32 @@ header {
     font-weight: 300;
 }
 
-/* @media only screen and (min-width: 900px) {
-    .parallax img {
-        top: -400px;
+@media only screen and (min-width: 900px) {
+    #text {
+        top: 50vh;
+    }
+    .landing-title {
+        font-size: 2.6em;
     }
 }
 
 @media only screen and (min-width: 1500px) {
+    .landing-title {
+        font-size: 5em;
+    }
+
     .parallax img {
-        top: -800px;
+        padding: 10px;
+        border-radius: 30px;
+    }
+
+    .sec {
+        box-shadow: 3px -8px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
     }
 }
+
+/*
 
 @media only screen and (min-width: 2000px) {
     .parallax img {

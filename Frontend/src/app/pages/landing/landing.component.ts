@@ -23,7 +23,7 @@ export class LandingComponent {
   let value = window.scrollY;
 
   this.text.nativeElement.style.marginTop = value * 0.4 + 'px';
-  this.archway.nativeElement.style.marginTop = value * 0.1 + 'px';
+  this.archway.nativeElement.style.marginTop = value * 0.2 + 'px';
   this.boulders.nativeElement.style.marginTop = value * 0.01 + 'px';
   this.sky.nativeElement.style.marginTop = value * -0.5 + 'px';
   this.sky2.nativeElement.style.marginTop = value * -0.5 + 'px';
