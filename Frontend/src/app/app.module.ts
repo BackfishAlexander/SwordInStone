@@ -24,6 +24,7 @@ import { CampaignBoxComponent } from './components/campaign-box/campaign-box.com
 import { InviteComponent } from './pages/invite/invite.component';
 import { CreateImportCharComponent } from './components/create-import-char/create-import-char.component';
 import { CharacterSheetComponent } from './components/character-sheet/character-sheet.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { SkillComponent } from './components/skill/skill.component';
 import { DiceRollerComponent } from './components/dice-roller/dice-roller.component';
 
@@ -46,6 +47,7 @@ import { DiceRollerComponent } from './components/dice-roller/dice-roller.compon
     InviteComponent,
     CreateImportCharComponent,
     CharacterSheetComponent,
+    FooterComponent,
     SkillComponent,
     DiceRollerComponent,
   ],

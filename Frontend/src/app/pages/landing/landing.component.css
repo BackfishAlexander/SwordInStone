@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Sedan+SC&family=Vast+Shadow&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.body {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 10px 10px;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 2em;
+    margin-right: 270px;
+    color: #ffffff;
+    pointer-events: none;
+}
+
+.parallax {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 130vh;
+}
+
+#text {
+    position: absolute;
+    top: 50vh;
+}
+
+.landing-title {
+    font-size: 2em;
+    text-wrap: nowrap;
+    color: #ffffff;
+    text-shadow: 10px 10px 10px rgba(0, 0, 0, .4);
+    font-family: "Vast Shadow", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.parallax img {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    height: 130vh;
+    width: 100vw;
+    /* width: 100%; */
+
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+}
+
+.sec {
+    position: relative;
+    top: -10vh;
+    border-radius: 30px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 100px;
+    box-shadow: 3px -8px 8px rgba(0, 0, 0, 0.6);
+}
+
+.sec h2 {
+    font-size: 3em;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.sec p {
+    font-size: 1em;
+    color: #fff;
+    font-weight: 300;
+}
+
+@media only screen and (min-width: 900px) {
+    #text {
+        top: 50vh;
+    }
+    .landing-title {
+        font-size: 2.6em;
+    }
+}
+
+@media only screen and (min-width: 1500px) {
+    .landing-title {
+        font-size: 5em;
+    }
+
+    .parallax img {
+        padding: 10px;
+        border-radius: 30px;
+    }
+
+    .sec {
+        box-shadow: 3px -8px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+    }
+}
+
+/*
+
+@media only screen and (min-width: 2000px) {
+    .parallax img {
+        top: -1500px;
+    }
+} */
