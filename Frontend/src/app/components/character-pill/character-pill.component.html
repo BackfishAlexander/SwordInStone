@@ -26,7 +26,7 @@
     </div>
 </div>
 
-<dialog #modal id="Character Sheet" class="modal">
+<div *ngIf="showCharacterSheet" #modal id="Character Sheet" class="modal modal-open">
   <div class="modal-box">
     <h1 class="text-3xl font-bold">Character Sheet</h1>
     <hr class="h-px my-2">
@@ -34,9 +34,9 @@
   </div>
 
   <form method="dialog" class="modal-backdrop">
-    <button class="modal-close">close</button>
+    <button (click)="closeSheet()" class="modal-close">close</button>
   </form>
-</dialog>
+</div>
 
 <dialog #hpModal id="HP" class="modal">
   <div class="modal-box">

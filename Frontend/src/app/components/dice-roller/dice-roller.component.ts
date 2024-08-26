@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import DiceBox from '@3d-dice/dice-box';
 import { Subscription } from 'rxjs';
 import { DiceRollerService } from 'src/app/services/dice-roller.service';
@@ -17,6 +17,7 @@ export class DiceRollerComponent implements OnInit {
     scale: 9,
     offscreen: true,
   })
+  isBusy = false;
 
   constructor(
     private diceRollService: DiceRollerService
@@ -30,11 +31,15 @@ export class DiceRollerComponent implements OnInit {
     this.diceBox.onRollComplete = () =>
       setTimeout(() => {
         this.diceBox.clear();
+        this.isBusy = false;
         // this.diceBox.reset();
       }, 2000)
   }
 
   rollD20() {
-    this.diceBox.roll('1d20')
+    if (this.isBusy == false) {
+      this.isBusy = true;
+      this.diceBox.roll('1d20')
+    }
   }
 }

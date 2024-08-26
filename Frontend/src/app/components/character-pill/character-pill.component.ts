@@ -12,6 +12,7 @@ export class CharacterPillComponent {
   @Input() character!: playerCharacter;
   @ViewChild('modal') modal!: ElementRef<HTMLElement>;
   @ViewChild('hpModal') hpModal!: ElementRef<HTMLElement>;
+  showCharacterSheet = false;
 
   constructor(
     private httpService: HttpService
@@ -21,8 +22,11 @@ export class CharacterPillComponent {
 
   openModal(modalType: 'character' | 'hp') {
     let modalElement: HTMLElement | null = null;
-    if (modalType === 'character' && this.modal) {
-      modalElement = this.modal.nativeElement;
+    if (modalType === 'character') {
+      // modalElement = this.modal.nativeElement;
+      console.log("Opening character sheet...");
+      this.showCharacterSheet = true;
+      return;
     } else if (modalType === 'hp' && this.hpModal) {
       modalElement = this.hpModal.nativeElement;
     }
@@ -46,5 +50,9 @@ export class CharacterPillComponent {
         console.log(error);
       }
     );
+  }
+
+  closeSheet() {
+    this.showCharacterSheet = false;
   }
 }
