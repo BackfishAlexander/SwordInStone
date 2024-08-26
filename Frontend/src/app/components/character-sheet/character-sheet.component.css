@@ -1,3 +1,6 @@
 .skillbox {
-    max-height: 40vh
+    max-height: 40vh;
+    overflow-x: hidden;
+    text-wrap: wrap;
 }
+

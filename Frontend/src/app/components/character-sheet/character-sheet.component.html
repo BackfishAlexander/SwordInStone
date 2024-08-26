@@ -43,12 +43,10 @@
             <hr>
             <app-skill *ngFor="let skill of skillList" [skill]="skill" [character]="character"></app-skill>
         </div>
-        <div class="skillbox p-2 w-fit bg-base-300 overflow-y-scroll border rounded-lg flex flex-grow justify-center" [ngStyle]="{'border-color': character.sheetColor}">
-            <div class="flex flex-row justify-around items-center h-full">
+        <div class="skillbox p-2 w-fit bg-base-300 border rounded-lg flex flex-grow justify-center" [ngStyle]="{'border-color': character.sheetColor}">
+            <div class="grid grid-cols-2 grid-rows-2 gap-4 p-4">
                 <div class="bg-red-400 p-5"></div>
                 <div class="bg-blue-400 p-5"></div>
-            </div>
-            <div class="flex flex-row justify-around items-center h-full">
                 <div class="bg-yellow-400 p-5"></div>
                 <div class="bg-green-400 p-5"></div>
             </div>
