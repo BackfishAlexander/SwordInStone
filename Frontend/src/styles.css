@@ -4,5 +4,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Sedan+SC&family=Vast+Shadow&display=swap');
 
 html, body {
-    overflow-x: hidden;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee152;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #d6dee12c;
+}
+
+.dice-box-canvas {
+  position: absolute !important; /* Fixed positioning to cover the entire viewport */
+  top: 0 !important;
+  left: 0 !important;
+  height: 100% !important;
+  width: 100% !important;
+  pointer-events: none !important; /* Ensure no interaction issues */
+  z-index: 2147483647 !important; /* Maximum possible z-index */
+}
+
+
+.modal, .modal-box {
+  z-index: 9999 !important; /* A lower z-index */
+}
+
+.modal-backdrop, .modal-close {
+  z-index: 9998 !important;
+}
+
+.overmodal {
+  z-index: 9999 !important;
 }
