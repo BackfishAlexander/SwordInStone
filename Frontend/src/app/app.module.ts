@@ -27,6 +27,8 @@ import { CharacterSheetComponent } from './components/character-sheet/character-
 import { FooterComponent } from './components/footer/footer.component';
 import { SkillComponent } from './components/skill/skill.component';
 import { DiceRollerComponent } from './components/dice-roller/dice-roller.component';
+import { TermsofserviceComponent } from './pages/termsofservice/termsofservice.component';
+import { PrivacypolicyComponent } from './pages/privacypolicy/privacypolicy.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { DiceRollerComponent } from './components/dice-roller/dice-roller.compon
     FooterComponent,
     SkillComponent,
     DiceRollerComponent,
+    TermsofserviceComponent,
+    PrivacypolicyComponent,
   ],
   imports: [
     BrowserModule,

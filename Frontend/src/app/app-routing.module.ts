@@ -9,6 +9,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { CampaignComponent } from './pages/campaign/campaign.component';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { InviteComponent } from './pages/invite/invite.component';
+import { TermsofserviceComponent } from './pages/termsofservice/termsofservice.component';
+import { PrivacypolicyComponent } from './pages/privacypolicy/privacypolicy.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -18,6 +20,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full'},
   { path: 'logout', component: LogoutComponent, pathMatch: 'full' },
   { path: 'register', component: RegisterComponent, pathMatch: 'full'},
+  { path: 'termsofservice', component: TermsofserviceComponent, pathMatch: 'full'},
+  { path: 'privacypolicy', component: PrivacypolicyComponent, pathMatch: 'full'},
   { path: 'invite/:id', component: InviteComponent},
   { path: '**', component: ErrorComponent} // Wildcard route for 404 page
 ];

@@ -12,6 +12,8 @@ export class CharacterPillComponent {
   @Input() character!: playerCharacter;
   @ViewChild('modal') modal!: ElementRef<HTMLElement>;
   @ViewChild('hpModal') hpModal!: ElementRef<HTMLElement>;
+  @ViewChild('colorModal') colorModal!: ElementRef<HTMLElement>;
+  @ViewChild('colorValue') colorValue!: ElementRef<HTMLInputElement>;
   showCharacterSheet = false;
 
   constructor(
@@ -20,7 +22,7 @@ export class CharacterPillComponent {
 
   }
 
-  openModal(modalType: 'character' | 'hp') {
+  openModal(modalType: 'character' | 'hp' | 'color') {
     let modalElement: HTMLElement | null = null;
     if (modalType === 'character') {
       // modalElement = this.modal.nativeElement;
@@ -29,6 +31,9 @@ export class CharacterPillComponent {
       return;
     } else if (modalType === 'hp' && this.hpModal) {
       modalElement = this.hpModal.nativeElement;
+    }
+    else if (modalType === 'color' && this.colorModal) {
+      modalElement = this.colorModal.nativeElement;
     }
 
     if (modalElement) {
@@ -54,5 +59,20 @@ export class CharacterPillComponent {
 
   closeSheet() {
     this.showCharacterSheet = false;
+  }
+
+  changeColor() {
+    let newColor = this.colorValue.nativeElement.value;
+    this.character.sheetColor = newColor;
+    this.httpService.postRequest(
+      this.httpService.buildURL(endpointList.characterColor.replace("{id}", this.character.id)),
+      {color: newColor}, 'json').then(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

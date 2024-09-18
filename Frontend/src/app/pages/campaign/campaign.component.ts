@@ -6,6 +6,7 @@ import { campaignDetailed, playerCharacter } from 'src/app/dtos/campaigns';
 import { HttpService } from 'src/app/services/http.service';
 import { endpointList } from 'src/environments/endpoint-list';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-campaign',
@@ -88,8 +89,25 @@ export class CampaignComponent {
           this.characters.push(playerCharacter);
         }
 
+        this.characters.sort((a, b) => {
+          // Check if either character is owned by the current user
+          const aIsOwner = a.ownerId === this.auth.getId();
+          const bIsOwner = b.ownerId === this.auth.getId();
+        
+          // If both are owned by the user or neither are owned, sort alphabetically
+          if (aIsOwner && bIsOwner) {
+            return a.name.localeCompare(b.name);
+          }
+          if (!aIsOwner && !bIsOwner) {
+            return a.name.localeCompare(b.name);
+          }
+        
+          // If `a` is owned, it comes first; otherwise `b` comes first
+          return aIsOwner ? -1 : 1;
+        });
+
         // this.playerlist.url = "localhost:4200/invite/" + this.id;
-        this.playerlist.url = "/invite/" + this.id;
+        this.playerlist.url = environment.url + "/invite/" + this.id;
     
         for (let player of this.campaignData.members) {
           if (this.campaignData.ownerId == player.user.id) {

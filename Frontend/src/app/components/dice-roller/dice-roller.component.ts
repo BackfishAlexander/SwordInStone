@@ -14,10 +14,11 @@ export class DiceRollerComponent implements OnInit {
     assetPath: '/assets/dice-box/',
     theme: 'theme-rock',
     themeColor: '#cf1717',
-    scale: 9,
+    scale: 8,
     offscreen: true,
   })
   isBusy = false;
+  private audio = new Audio("assets/sounds/roll.mp3");
 
   constructor(
     private diceRollService: DiceRollerService
@@ -39,6 +40,7 @@ export class DiceRollerComponent implements OnInit {
   rollD20() {
     if (this.isBusy == false) {
       this.isBusy = true;
+      this.audio.play();
       this.diceBox.roll('1d20')
     }
   }

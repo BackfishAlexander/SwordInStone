@@ -5,3 +5,25 @@
 .player-badge {
     margin-right: 0.125rem/* 2px */;
 }
+
+.currency-badge {
+    margin: 0px 4px;
+    color: white;
+    border: solid 1px rgb(20, 20, 20 0.4);
+}
+
+.gold-badge {
+    /* background-color: #b39800; */
+    margin-left: 0px;
+}
+
+.name-text {
+    font-size: clamp(12px, 5vw, 30px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sub-text {
+    font-size: clamp(6px, 5vw, 16px);
+}

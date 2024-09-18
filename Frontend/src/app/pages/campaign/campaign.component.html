@@ -11,7 +11,7 @@
 
 <div *ngIf="!loading" class="flex items-center justify-center flex-auto flex-col" @fadeInOut>
     <h1 class="text-center text-5xl font-bold mt-1 mb-2">{{campaignData.name}}</h1>
-    <h2 class="text-center text-1xl mb-3 text-gray-300">Campaign</h2>
+    <!-- <h2 class="text-center text-1xl mb-3 text-gray-300">Campaign</h2> -->
     <div role="tablist" class="tabs tabs-bordered max-w-96">
         <a role="tab" class="tab" (click)="tabClick(1);" [class.tab-active]="activeTab === 1" [class.opacity-25]="activeTab !== 1">Tabletop</a>
         <a role="tab" class="tab" (click)="tabClick(2);" [class.tab-active]="activeTab === 2" [class.opacity-25]="activeTab !== 2">Overview</a>

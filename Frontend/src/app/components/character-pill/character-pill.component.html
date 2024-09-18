@@ -1,23 +1,41 @@
 <!-- Individual Characters start here -->
 <div id="Character" class="bg-base-200 rounded-full p-3 m-2 border-base-200 border flex flex-row">
     <div id="character-image" class="avatar">
-        <div class="w-24 rounded-full">
+        <div class="w-24 rounded-full cursor-pointer" (click)="openModal('character')">
           <img [src]="character.avatarURL" />
         </div>
     </div>
-    <div id="character-name-race-level" (click)="openModal('character')" class="ml-5 mt-1 flex flex-col cursor-pointer">
-        <h1 class="text-3xl text-gray-50 font-light md:text-5xl">{{ character.name }}</h1>
-        <h2 class="text-sm text-gray-300 font-light mt-1 ml-2 md:text-lg">Level {{ character.level }} {{character.race}} {{character.class}}</h2>
+    <div id="character-name-race-level" class="ml-5 mt-1 flex flex-col">
+        <h1 class="name-text text-gray-50 font-light cursor-pointer" (click)="openModal('character')">{{ character.name }}</h1>
+        <h2 class="sub-text text-gray-300 font-light">Level {{ character.level }} {{character.race}} {{character.class}}</h2>
+        <div>
+          <div class="badge mr-2 cursor-pointer">
+            <h3 class="mr-1">{{character.GP}}</h3>
+            <div class="tooltip" data-tip="Gold">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 ddbc-svg  ddbc-ability-icon"><path d="m4 4.5c0-.27615.22385-.5.5-.5h15c.2761 0 .5.22385.5.5v1c0 .27615-.2239.5-.5.5 0 0-2 2.32653-2 6 0 3.6735 2 6 2 6 .2761 0 .5.2239.5.5v1c0 .2761-.2239.5-.5.5h-15c-.27615 0-.5-.2239-.5-.5v-1c0-.2761.22385-.5.5-.5 0 0 2-1.8673 2-6 0-4.13265-2-6-2-6-.27615 0-.5-.22385-.5-.5z" fill="#dd970e"></path><path d="m9.99993 12c0-.6216-.03345-1.2128-.09414-1.7735l4.11311 1.0283c-.002.04-.0039.0802-.0056.1205l-4.07254 2.0363c.03844-.4517.05917-.9222.05917-1.4116z" fill="#eca825"></path><path d="m9.79321 14.6034 4.21509-2.1076c.0516 1.5192.3351 2.8657.7046 4.0042h-5.36158c.17845-.5819.33016-1.214.44189-1.8966z" fill="#eca825"></path><path d="m14.0189 11.2548-4.11311-1.0283c-.10897-1.00676-.30575-1.91549-.55447-2.7265h5.36158c-.3492 1.07581-.6215 2.3373-.694 3.7548z" fill="#ffb72c"></path><path d="m6.26343 5.5h11.54557c-.1777.29323-.3708.64106-.5624 1.0399-.0702.14609-.1404.29953-.2097.4601h-9.99142c-.10248-.24281-.20889-.47037-.31689-.68278-.15543-.30571-.31301-.57786-.46516-.81722z" fill="#eca825"></path><path clip-rule="evenodd" d="m17.8089 5.5h-11.54556c.15215.23936.30973.51151.46516.81722.66607 1.31004 1.2715 3.19617 1.2715 5.68278 0 2.4866-.60543 4.3727-1.2715 5.6828-.15543.3057-.31301.5778-.46516.8172h11.54556c-.1777-.2932-.3708-.6411-.5624-1.0399-.6216-1.2941-1.2465-3.1649-1.2465-5.4601 0-2.29517.6249-4.166 1.2465-5.4601.1916-.39884.3847-.74667.5624-1.0399zm2.6911 12.5s-2-2.3265-2-6c0-3.67347 2-6 2-6 .2761 0 .5-.22385.5-.5v-2c0-.27615-.2239-.5-.5-.5h-17c-.27615 0-.5.22385-.5.5v2c0 .27615.22385.5.5.5 0 0 2 1.86735 2 6 0 4.1327-2 6-2 6-.27615 0-.5.2239-.5.5v2c0 .2761.22385.5.5.5h17c.2761 0 .5-.2239.5-.5v-2c0-.2761-.2239-.5-.5-.5z" fill="#c78727" fill-rule="evenodd"></path><path d="m8 4.25c0-.41421.33579-.75.75-.75h11c.4142 0 .75.33579.75.75s-.3358.75-.75.75h-11c-.41421 0-.75-.33579-.75-.75z" fill="#ffb72c"></path><circle cx="6.75" cy="4.25" fill="#eca825" r=".75"></circle></svg>
+            </div>
+          </div>         
+          <div class="badge mr-2 cursor-pointer">
+            <h3 class="mr-1">{{character.SP}}</h3>
+            <div class="tooltip" data-tip="Silver">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 ddbc-svg  ddbc-ability-icon"><path clip-rule="evenodd" d="m2.49372 21c-.3779 0-.61528-.4138-.42875-.7473l9.50623-16.99932c.189-.33784.6686-.33784.8576 0l9.5062 16.99932c.1866.3335-.0508.7473-.4287.7473zm9.50628-5c.6904 0 1.25-.5596 1.25-1.25s-.5596-1.25-1.25-1.25-1.25.5596-1.25 1.25.5596 1.25 1.25 1.25z" fill="#a59e98" fill-rule="evenodd"></path><path clip-rule="evenodd" d="m2.06497 20.2527c-.18653.3335.05085.7473.42875.7473h19.01258c.3779 0 .6153-.4138.4287-.7473l-9.5062-16.99932c-.189-.33784-.6686-.33784-.8576 0zm10.15323-12.30742c-.0954-.17063-.341-.17063-.4364 0l-5.69332 10.18092c-.09319.1666.02727.372.21819.372h11.38663c.191 0 .3114-.2054.2182-.372z" fill="#99938d" fill-rule="evenodd"></path><path d="m12 17.25c1.3807 0 2.5-1.1193 2.5-2.5 0-.1714-.0173-.3388-.0501-.5005.1919.3752.3001.8002.3001 1.2505 0 1.5188-1.2312 2.75-2.75 2.75s-2.75-1.2312-2.75-2.75c0-.4503.10824-.8753.30011-1.2505-.03286.1617-.05011.3291-.05011.5005 0 1.3807 1.1193 2.5 2.5 2.5z" fill="#857d76"></path><circle cx="12" cy="14.75" fill="#a59e98" fill-opacity=".5" r="1.25"></circle><path d="m11.7819 7.94529c.0954-.17064.341-.17064.4364 0l5.6933 10.18091c.0932.1666-.0273.372-.2182.372h-.133l-5.3421-9.55291c-.0954-.17064-.341-.17064-.4364 0l-5.34216 9.55291h-.13298c-.19093 0-.31139-.2054-.2182-.372z" fill="#b5ada7"></path><path d="m11.6724 11.3586c-.2371-.4211.1496-1.88397.5707-2.12106.1389-.07818.7171.84136.9542 1.26246l.5249 1.1414c.2371.4211.0879.9547-.3331 1.1918-.4211.2371-.9547.0879-1.1918-.3332z" fill="#b5ada7"></path><path d="m11.4292 5.62102c-.2371-.42109.1496-1.88394.5707-2.12103.1389-.07818.7172.84137.9542 1.26246l3.0664 5.44615c.2371.4211.0879.9546-.3332 1.1917s-.9547.0879-1.1917-.3332z" fill="#cec6bf"></path></svg>            </div>
+          </div>    
+          <div class="badge cursor-pointer">
+            <h3 class="mr-1">{{character.CP}}</h3>
+            <div class="tooltip" data-tip="Copper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 ddbc-svg  ddbc-ability-icon"><path clip-rule="evenodd" d="m6.41421 3c-.26521 0-.51957.10536-.7071.29289l-2.41422 2.41422c-.18753.18753-.29289.44189-.29289.7071v11.17159c0 .2652.10536.5196.29289.7071l2.41422 2.4142c.18753.1875.44189.2929.7071.2929h11.17159c.2652 0 .5196-.1054.7071-.2929l2.4142-2.4142c.1875-.1875.2929-.4419.2929-.7071v-11.17159c0-.26521-.1054-.51957-.2929-.7071l-2.4142-2.41422c-.1875-.18753-.4419-.29289-.7071-.29289zm5.58579 10.5c.8284 0 1.5-.6716 1.5-1.5s-.6716-1.5-1.5-1.5-1.5.6716-1.5 1.5.6716 1.5 1.5 1.5z" fill="#ab6e57" fill-rule="evenodd"></path><path d="m10 9c0-1.10457.8954-2 2-2h4c1.1046 0 2 .89543 2 2v1c0 1.1046-.8954 2-2 2h-1c0-1.6569-1.3431-3-3-3-.7684 0-1.4692.28885-2 .76389z" fill="#c2866f"></path><path d="m17.7071 7.94975-.6568-.65686c-.1876-.18753-.4419-.29289-.7072-.29289h-8.68625c-.26521 0-.51957.10536-.7071.29289l-.65686.65686c-.18753.18753-.29289.44189-.29289.7071v-1c0-.26521.10536-.51957.29289-.7071l.65686-.65686c.18753-.18753.44189-.29289.7071-.29289h8.68625c.2653 0 .5196.10536.7072.29289l.6568.65686c.1875.18753.2929.44189.2929.7071v1c0-.26521-.1054-.51957-.2929-.7071z" fill="#9f6854"></path><path d="m14.9585 12.5c-.238 1.4189-1.472 2.5-2.9585 2.5s-2.72048-1.0811-2.95852-2.5c-.02728.1626-.04148.3296-.04148.5 0 1.6569 1.3431 3 3 3s3-1.3431 3-3c0-.1704-.0142-.3374-.0415-.5z" fill="#9f6854"></path><g fill="#c2866f"><path clip-rule="evenodd" d="m15 12c0 1.6569-1.3431 3-3 3s-3-1.3431-3-3 1.3431-3 3-3 3 1.3431 3 3zm-3 1.5c.8284 0 1.5-.6716 1.5-1.5s-.6716-1.5-1.5-1.5-1.5.6716-1.5 1.5.6716 1.5 1.5 1.5z" fill-rule="evenodd"></path><circle cx="12" cy="12" fill-opacity=".5" r="1.5"></circle><path clip-rule="evenodd" d="m6.29289 6.94975c-.18753.18753-.29289.44189-.29289.7071v8.68625c0 .2653.10536.5196.29289.7072l.65686.6568c.18753.1875.44189.2929.7071.2929h8.68625c.2653 0 .5196-.1054.7072-.2929l.6568-.6568c.1875-.1876.2929-.4419.2929-.7072v-8.68625c0-.26521-.1054-.51957-.2929-.7071l-.6568-.65686c-.1876-.18753-.4419-.29289-.7072-.29289h-8.68625c-.26521 0-.51957.10536-.7071.29289zm.12132-3.94975c-.26521 0-.51957.10536-.7071.29289l-2.41422 2.41422c-.18753.18753-.29289.44189-.29289.7071v11.17159c0 .2652.10536.5196.29289.7071l2.41422 2.4142c.18753.1875.44189.2929.7071.2929h11.17159c.2652 0 .5196-.1054.7071-.2929l2.4142-2.4142c.1875-.1875.2929-.4419.2929-.7071v-11.17159c0-.26521-.1054-.51957-.2929-.7071l-2.4142-2.41422c-.1875-.18753-.4419-.29289-.7071-.29289z" fill-rule="evenodd"></path></g><path clip-rule="evenodd" d="m10.125 4.5c0-.48325.3918-.875.875-.875h6.0858c.4973 0 .9742.19754 1.3258.54917l1.4142 1.41422c.3517.35163.5492.82854.5492 1.32582v3.58579c0 .4832-.3918.875-.875.875s-.875-.3918-.875-.875v-3.58579c0-.03315-.0132-.06494-.0366-.08838l-1.4142-1.41422c-.0235-.02344-.0553-.03661-.0884-.03661h-6.0858c-.4832 0-.875-.39175-.875-.875z" fill="#e6a58c" fill-rule="evenodd"></path><circle cx="8.375" cy="4.47501" fill="#e5a48c" r=".875"></circle></svg>            </div>
+          </div>   
+        </div>
     </div>
     <div id="right-anchor-icons" class="flex ml-auto">
 
-        <div class="mt-auto mb-auto">
+        <!-- <div class="mt-auto mb-auto">
             <div class="tooltip tooltip-left" [attr.data-tip]="character.GP + ' GP'">
                 <div class="font-bold text-yellow-600 rounded-full radial-progress mt-auto mb-auto mr-5 bg-base-100" role="progressbar" style="--value:100; --thickness: 4px;">{{ character.GP }} GP</div>
             </div>
-        </div>
+        </div> -->
 
-        <div class="mt-auto mb-auto">
+        <div class="mt-auto mb-auto hidden md:block">
             <div (click)="openModal('hp')" class="tooltip tooltip-left" [attr.data-tip]="character.HP +' / ' + character.maxHP + ' HP'">
                 <div class="font-bold text-red-600 rounded-full radial-progress mt-auto mb-auto mr-5 bg-base-100" role="progressbar" [style.--value]="(character.HP / character.maxHP) * 100" style="--thickness: 4px;">{{ character.HP }} HP</div>
             </div>
@@ -27,9 +45,14 @@
 </div>
 
 <div *ngIf="showCharacterSheet" #modal id="Character Sheet" class="modal modal-open">
-  <div class="modal-box">
-    <h1 class="text-3xl font-bold">Character Sheet</h1>
-    <hr class="h-px my-2">
+  <div class="modal-box character-sheet">
+    <div class="flex flex-row justify-between">
+      <h1 class="text-3xl font-bold">Character Sheet</h1>
+      <div class="cursor-pointer" (click)="openModal('color')">
+        <img class="h-8" src="../assets/color.svg">
+      </div>
+    </div>
+    <hr class="h-px my-2" [ngStyle]="{ 'border-color': character.sheetColor }">
     <app-character-sheet [character]="character"></app-character-sheet>
   </div>
 
@@ -46,6 +69,18 @@
       <button type="button" class="button p-1 rounded-lg text-black bg-red-500" (click)="addHP(hpInput.value)">Heal</button>
       <button type="button" class="button p-1 rounded-lg text-black bg-green-500" (click)="addHP('-' + hpInput.value)">Damage</button>
     </div>
+  </div>
+
+  <form method="dialog" class="modal-backdrop">
+    <button class="modal-close">close</button>
+  </form>
+</dialog>
+
+<dialog #colorModal id="colorModal" class="modal">
+  <div class="modal-box flex flex-col">
+    <h3 class="text-lg font-bold mb-2 text-center">Select Character Sheet Accent Color</h3>
+    <input #colorValue type="color" [value]="character.sheetColor" id="colorPicker" class="bg-transparent w-full h-20 rounded-lg">
+    <button class="btn btn-primary" id="submitButton" (click)="changeColor()">Submit</button>
   </div>
 
   <form method="dialog" class="modal-backdrop">

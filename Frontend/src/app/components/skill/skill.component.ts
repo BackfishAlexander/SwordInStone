@@ -11,6 +11,7 @@ import { CharacterUtils } from 'src/app/utils/CharacterUtils';
 export class SkillComponent {
   @Input() skill!: string;
   @Input() character!: playerCharacter;
+  @Input() saving!: boolean;
 
   constructor(
     private roller: DiceRollerService
@@ -51,6 +52,9 @@ export class SkillComponent {
     }
     else if (CharacterUtils.STR_SKILLS.includes(skill)) {
       return "STR";
+    }
+    else if (CharacterUtils.CON_SKILLS.includes(skill)) {
+      return "CON";
     }
     else if (CharacterUtils.DEX_SKILLS.includes(skill)) {
       return "DEX";

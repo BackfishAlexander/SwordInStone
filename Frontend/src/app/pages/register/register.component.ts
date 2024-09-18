@@ -11,7 +11,8 @@ import { NotificationService } from 'src/app/services/notification.service';
 export class RegisterComponent implements OnInit {
   registerData = {
     username: '',
-    password: ''
+    password: '',
+    agreeToTerms: false
   };
   loading = false;
 

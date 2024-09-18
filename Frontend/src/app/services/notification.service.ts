@@ -14,11 +14,13 @@ export class NotificationService {
   private _notifications = new ReplaySubject<Notification | null>(1);
   notifications$: Observable<Notification | null> = this._notifications.asObservable();
 
-  showNotification(message: string, type: 'info' | 'success' | 'warning' | 'error') {
+  showNotification(message: string, type: 'info' | 'success' | 'warning' | 'error', forever = false) {
     this._notifications.next({ message, type });
-
-    setTimeout(() => {
-      this._notifications.next(null);
-    }, 5000); // Hide notification after 5 seconds
+    
+    if (forever == false) {
+      setTimeout(() => {
+        this._notifications.next(null);
+      }, 5000); // Hide notification after 5 seconds
+    }
   }
 }

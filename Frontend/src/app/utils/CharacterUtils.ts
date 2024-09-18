@@ -2,20 +2,23 @@ import { playerCharacter } from "../dtos/campaigns";
 
 export class CharacterUtils {
     static STR_SKILLS = [
+        "strength-saving-throws",
         "athletics"
     ]
 
     static DEX_SKILLS = [
+        "dexterity-saving-throws",
         "acrobatics",
         "sleight-of-hand",
         "stealth"
     ]
 
     static CON_SKILLS = [
-
+        "constitution-saving-throws",
     ]
 
     static INT_SKILLS = [
+        "intelligence-saving-throws",
         "arcana",
         "history",
         "investigation",
@@ -24,6 +27,7 @@ export class CharacterUtils {
     ]
 
     static WIS_SKILLS = [
+        "wisdom-saving-throws",
         "animal-handling",
         "medicine",
         "perception",
@@ -32,6 +36,7 @@ export class CharacterUtils {
     ]
 
     static CHA_SKILLS = [
+        "charisma-saving-throws",
         "deception",
         "intimidation",
         "performance",
@@ -64,9 +69,9 @@ export class CharacterUtils {
             bonus += Math.floor((character.DEX - 10) / 2)
         }
         // Currently no CON skills
-        // else if (this.CON_SKILLS.includes(skill)) {
-        //     bonus += character.CON
-        // }
+        else if (this.CON_SKILLS.includes(skill)) {
+            bonus += Math.floor((character.CON - 10) / 2)
+        }
         else if (this.INT_SKILLS.includes(skill)) {
             bonus += Math.floor((character.INT - 10) / 2)
         }

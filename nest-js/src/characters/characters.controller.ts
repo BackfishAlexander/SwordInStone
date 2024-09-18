@@ -18,6 +18,11 @@ export class CharactersController {
     return this.charactersService.updateHP(id, hp.hp);
   }
 
+  @Post(':id/color')
+  async updateColor(@Param('id') id: string, @Body() color: {color: string}) {
+    return this.charactersService.updateColor(id, color.color);
+  }
+
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return this.charactersService.remove(id);
