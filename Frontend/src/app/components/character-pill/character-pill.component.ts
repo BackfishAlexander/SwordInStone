@@ -42,14 +42,49 @@ export class CharacterPillComponent {
   }
 
   addHP(inputString: string) {
-    let n = parseInt(inputString);
-    console.log(endpointList.characterHP.replace("{id}", this.character.id));
+    let n: number;
+    try {
+      n = parseInt(inputString) || 0;
+      (this.hpModal.nativeElement as any).close();
+    }
+    catch (e){
+      console.log("ERROR ADDING HP");
+      console.log(e);
+      return;
+    }
+    // console.log(endpointList.characterHP.replace("{id}", this.character.id));
     this.httpService.postRequest(
       this.httpService.buildURL(endpointList.characterHP.replace("{id}", this.character.id)),
       {hp: Math.max(this.character.HP + n, 0)}, 'json').then(
       response => {
         console.log(response);
         this.character.HP = Math.max(this.character.HP + n, 0);
+        this.character.HP = Math.min(this.character.HP, 999);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  setHP(inputString: string) {
+    let n: number;
+    try {
+      n = parseInt(inputString) || this.character.HP;
+      (this.hpModal.nativeElement as any).close();
+    }
+    catch (e){
+      console.log("ERROR ADDING HP");
+      console.log(e);
+      return;
+    }
+    // console.log(endpointList.characterHP.replace("{id}", this.character.id));
+    this.httpService.postRequest(
+      this.httpService.buildURL(endpointList.characterHP.replace("{id}", this.character.id)),
+      {hp: Math.min(Math.max(n, 0), 999)}, 'json').then(
+      response => {
+        console.log(response);
+        this.character.HP = Math.min(Math.max(n, 0), 999)
       },
       error => {
         console.log(error);

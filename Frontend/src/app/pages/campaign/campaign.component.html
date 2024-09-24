@@ -27,8 +27,8 @@
     This is the Shop tab
 </div>
 
-<div id="Overview Page Content" *ngIf="activeTab === 2 && !loading" class="flex flex-col justify-between w-full mt-4 h-full md:flex-row" @fadeInOut>
-    <div id="Characters" class="flex-1 md:mr-10 mb-2">
+<div id="Overview Page Content" *ngIf="activeTab === 2 && !loading" class="flex flex-col md:justify-center w-full mt-4 h-full md:flex-row" @fadeInOut>
+    <div id="Characters" class="md:mr-2 mb-2 md:justify-center">
 
         <app-create-import-char
         *ngIf="showCreateButton()"
@@ -43,7 +43,7 @@
     </div>
 
     <!-- Side Bar Divs -->
-    <div class="flex flex-col ml-1">
+    <div class="flex flex-col ml-5 md:ml-1">
 
         <app-player-list
         [playerlist]="playerlist"
