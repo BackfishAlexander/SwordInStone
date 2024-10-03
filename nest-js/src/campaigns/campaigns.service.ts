@@ -172,7 +172,8 @@ export class CampaignsService {
             user: {
               select: {
                 id: true,
-                username: true
+                username: true,
+                createdItems: true,
               }
             }
           }
@@ -191,7 +192,25 @@ export class CampaignsService {
             }
           }
         },
-        characters: true
+        characters: {
+          include: {
+            owner: {
+              select: {
+                username: true,
+                isSubscriber: true,
+              }
+            },
+            inventory: {
+              include: {
+                items: {
+                  include: {
+                    item: true
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     });
   }

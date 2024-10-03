@@ -7,7 +7,7 @@
         <div class="hp absolute mt-auto mb-auto hover:cursor-pointer">
           <div (click)="openModal('hp')" class="tooltip tooltip-left" [attr.data-tip]="character.HP +' / ' + character.maxHP + ' HP'">
               <div class="hp-circle font-bold text-red-600 rounded-full radial-progress mt-auto mb-auto mr-5" role="progressbar" [style.--value]="(character.HP / character.maxHP) * 100" style="--thickness: 4px;">
-                <div class="hp-text opacity-0 font-bold text-center m-auto p-24 z-10 text-red-600 hover:opacity-100">{{character.HP}}/{{character.maxHP}}</div>
+                <div class="hp-text opacity-0 font-bold text-center m-auto p-24 z-20 text-red-500 hover:opacity-100">{{character.HP}}/{{character.maxHP}}</div>
               </div>
           </div>
       </div>
@@ -59,28 +59,72 @@
     </div>
 </div>
 
-<div *ngIf="showCharacterSheet" #modal id="Character Sheet" class="modal modal-open">
-  <div class="modal-box character-sheet">
-    <div class="flex flex-row justify-between">
-      <h1 class="text-3xl font-bold">Character Sheet</h1>
-      <div class="cursor-pointer" (click)="openModal('color')">
-        <img class="h-8" src="../assets/color.svg">
+<div *ngIf="showCharacterSheet" #modal id="Character Sheet" class="modal modal-open overflow-hidden">
+  <!-- Modal backdrop -->
+  <div class="modal-backdrop" (click)="closeSheet()"></div>
+
+  <!-- Container for character sheets -->
+  <div class="flex items-center justify-center min-h-screen">
+    <div class="relative">
+      <!-- First character sheet (can swap positions) -->
+      <div
+        class="modal-box character-sheet absolute sheet rounded-none md:rounded-xl"
+        [ngClass]="{'top-sheet': !inventoryOnTop, 'bottom-sheet': inventoryOnTop}"
+        (click)="inventoryOnTop ? swapSheets() : null"
+      >
+        <!-- Sheet Content -->
+        <div class="flex flex-row justify-between">
+          <div class="flex flex-row align-middle">
+            <h1 (click)="closeSheet()" class="font-bold text-center py-1.5 px-2 mr-2 cursor-pointer block md:hidden select-none rounded-md bg-base-300">X</h1>
+            <h1 class="text-3xl font-bold">Character Sheet</h1>
+          </div>
+          <div *ngIf="isMe" class="cursor-pointer" (click)="openModal('color')">
+            <img class="h-8" src="../assets/color.svg">
+          </div>
+        </div>
+        <hr class="h-px my-2" [ngStyle]="{ 'border-color': character.sheetColor }">
+        <app-character-sheet [character]="character"></app-character-sheet>
+      </div>
+
+      <!-- Second inventory sheet (can swap positions) -->
+      <div
+        class="modal-box character-sheet absolute sheet rounded-none md:rounded-xl inventory-sheet"
+        [ngClass]="{'top-sheet': inventoryOnTop, 'bottom-sheet': !inventoryOnTop}"
+        (click)="!inventoryOnTop ? swapSheets() : null"
+      >
+        <!-- Sheet Content -->
+        <div class="flex flex-row justify-start w-full">
+          <h1 (click)="closeSheet()" class="font-bold text-center py-1.5 px-2 mr-2 cursor-pointer block md:hidden select-none rounded-md bg-base-300">X</h1>
+          <div class="flex flex-row justify-evenly w-full">
+            <button (click)="tabClick(1);" [class.my-tab-active]="activeTab === 1" class="my-tab text-xl font-semibold">Inventory</button>
+            <button (click)="tabClick(2);" [class.my-tab-active]="activeTab === 2" class="my-tab text-xl font-semibold">Spells</button>
+            <button (click)="tabClick(3);" [class.my-tab-active]="activeTab === 3" class="my-tab text-xl font-semibold">Features</button>
+            <button (click)="tabClick(4);" [class.my-tab-active]="activeTab === 4" class="my-tab text-xl font-semibold">Notes</button>
+          </div>
+        </div>
+        <hr class="h-px my-2" [ngStyle]="{ 'border-color': character.sheetColor }">
+        <!-- <app-character-sheet [character]="character"></app-character-sheet> -->
+         <div class="inventory-card-container">
+          <app-inventory-sheet *ngIf="activeTab === 1" [character]="character"></app-inventory-sheet>
+
+         </div>
       </div>
     </div>
-    <hr class="h-px my-2" [ngStyle]="{ 'border-color': character.sheetColor }">
-    <app-character-sheet [character]="character"></app-character-sheet>
   </div>
 
-  <form method="dialog" class="modal-backdrop">
+  <form method="dialog" class="absolute modal-backdrop w-full h-full">
     <button (click)="closeSheet()" class="modal-close">close</button>
   </form>
 </div>
+
+
+
 
 <dialog #hpModal id="HP" class="modal">
   <div class="modal-box">
     <h1 class="text-2xl mb-1">Update <b>{{character.name}}</b>'s HP</h1>
     <hr class="mb-3">
-    <p class="mb-5 font-semibold">Current HP: {{character.HP}}/{{character.maxHP}}</p>
+    <p class="mb-5">Current HP: <b>{{character.HP}}</b>/<b>{{character.maxHP}}</b></p>
     <div class="flex justify-center">
       <button type="button" class="button btn p-1 w-20 rounded-lg text-black bg-green-600 hover:bg-green-700" (click)="addHP(hpInput.value)">Heal</button>
       <input type="number" #hpInput class="hp-modal-number-input text-center bg-transparent mx-5 appearance-none rounded-xl hover:appearance-none" placeholder="Enter HP" />
@@ -101,7 +145,12 @@
   <div class="modal-box flex flex-col">
     <h3 class="text-lg font-bold mb-2 text-center">Select Character Sheet Accent Color</h3>
     <input #colorValue type="color" [value]="character.sheetColor" id="colorPicker" class="bg-transparent w-full h-20 rounded-lg">
-    <button class="btn btn-primary" id="submitButton" (click)="changeColor()">Submit</button>
+    <hr class="my-2">
+    <label (click)="updateRainbow()" class="cursor-pointer flex flex-row justify-start align-middle">
+      <input type="checkbox" class="toggle mr-5" [(ngModel)]="character.rainbowSheet" [disabled]="!isSubscriber"/>
+      <span class="select-none">Rainbow Sheet</span>
+    </label>
+    <button class="btn btn-primary my-2" id="submitButton" (click)="changeColor()">Submit</button>
   </div>
 
   <form method="dialog" class="modal-backdrop">

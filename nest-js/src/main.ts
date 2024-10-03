@@ -1,6 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as dotenv from 'dotenv';
+import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
   const isProd = process.env.NODE_ENV === "production";
@@ -14,9 +16,10 @@ async function bootstrap() {
   app.setGlobalPrefix("api/v1");
 
   if (isProd) {
-    await app.listen(8080);
+    Logger.log("LOADING PRODUCTION");
   }
   else {
+    Logger.log("LOADING DEV");
     const options = new DocumentBuilder()
     .setTitle('Sword in Stone API')
     .setDescription('API for Sword in Stone')
@@ -28,8 +31,8 @@ async function bootstrap() {
   
     const document = SwaggerModule.createDocument(app, options);
     SwaggerModule.setup('api-docs', app, document);
-  
-    await app.listen(8080);
   }
+
+  await app.listen(8080);
 }
 bootstrap();

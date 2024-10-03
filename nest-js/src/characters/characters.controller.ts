@@ -23,6 +23,22 @@ export class CharactersController {
     return this.charactersService.updateColor(id, color.color);
   }
 
+  @Post(':id/rainbow-color')
+  async updateRainbowSheet(@Param('id') id: string, @Body() rainbow: {rainbow: boolean}) {
+    return this.charactersService.updateRainbowSheet(id, rainbow.rainbow);
+  }
+
+  @Post(':id/add-item')
+  async addItem(@Param('id') id: string, @Body() itemInfo: {
+    itemId: string,
+    overrideName: string,
+    OverrideDescription: string,
+    overrideValue: string,
+    quantity: number,
+  }) {
+    return this.charactersService.createCharacterItem(id, itemInfo);
+  }
+
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return this.charactersService.remove(id);

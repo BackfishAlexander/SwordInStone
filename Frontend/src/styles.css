@@ -39,14 +39,14 @@ html, body {
 }
 
 
-.modal, .modal-box {
-  z-index: 9999 !important; /* A lower z-index */
-}
+/* .modal, .modal-box { */
+  /* z-index: 9999 !important; A lower z-index */
+/* } */
 
-.modal-backdrop, .modal-close {
-  z-index: 9998 !important;
-}
+/* .modal-backdrop, .modal-close { */
+  /* z-index: 9998 !important; */
+/* } */
 
-.overmodal {
-  z-index: 9999 !important;
-}
+/* .overmodal { */
+  /* z-index: 9999 !important; */
+/* } */

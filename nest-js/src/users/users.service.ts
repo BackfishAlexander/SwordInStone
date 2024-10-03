@@ -28,11 +28,14 @@ export class UsersService {
   }
 
   async findByUsername(username: string) {
-    return this.databaseService.users.findUnique({
+    return this.databaseService.users.findFirst({
       where: {
-        username: username,
+        username: {
+          equals: username.toLowerCase(),  // convert the input to lowercase
+          mode: 'insensitive',             // make the query case-insensitive
+        }
       }
-    })
+    });
   }
 
   async update(id: string, updateUserDto: Prisma.UsersUpdateInput) {

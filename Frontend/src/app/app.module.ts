@@ -29,6 +29,11 @@ import { SkillComponent } from './components/skill/skill.component';
 import { DiceRollerComponent } from './components/dice-roller/dice-roller.component';
 import { TermsofserviceComponent } from './pages/termsofservice/termsofservice.component';
 import { PrivacypolicyComponent } from './pages/privacypolicy/privacypolicy.component';
+import { InventorySheetComponent } from './components/inventory-sheet/inventory-sheet.component';
+import { ItemLineComponent } from './components/item-line/item-line.component';
+import { MyAccountComponent } from './pages/my-account/my-account.component';
+import { TagCreatorComponent } from './components/tag-creator/tag-creator.component';
+import { TagComponent } from './components/tag/tag.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +59,11 @@ import { PrivacypolicyComponent } from './pages/privacypolicy/privacypolicy.comp
     DiceRollerComponent,
     TermsofserviceComponent,
     PrivacypolicyComponent,
+    InventorySheetComponent,
+    ItemLineComponent,
+    MyAccountComponent,
+    TagCreatorComponent,
+    TagComponent,
   ],
   imports: [
     BrowserModule,

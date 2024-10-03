@@ -11,11 +11,12 @@ import { LogoutComponent } from './pages/logout/logout.component';
 import { InviteComponent } from './pages/invite/invite.component';
 import { TermsofserviceComponent } from './pages/termsofservice/termsofservice.component';
 import { PrivacypolicyComponent } from './pages/privacypolicy/privacypolicy.component';
+import { MyAccountComponent } from './pages/my-account/my-account.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'landing', component: LandingComponent, pathMatch: 'full'},
-  { path: 'campaign/:id', component: CampaignComponent},
+  { path: 'campaign/:id', component: CampaignComponent, canActivate: [AuthGuardServiceService]},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuardServiceService], pathMatch: 'full'},
   { path: 'login', component: LoginComponent, pathMatch: 'full'},
   { path: 'logout', component: LogoutComponent, pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'termsofservice', component: TermsofserviceComponent, pathMatch: 'full'},
   { path: 'privacypolicy', component: PrivacypolicyComponent, pathMatch: 'full'},
   { path: 'invite/:id', component: InviteComponent},
+  { path: 'my-account', component: MyAccountComponent, canActivate: [AuthGuardServiceService]},
   { path: '**', component: ErrorComponent} // Wildcard route for 404 page
 ];
 

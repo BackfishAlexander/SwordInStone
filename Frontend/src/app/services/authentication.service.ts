@@ -10,6 +10,7 @@ import { HttpService } from './http.service';
 
 interface ExtendedJwtPayload extends JwtPayload {
   username?: string;
+  role?: string;
 }
 
 @Injectable({
@@ -94,12 +95,34 @@ export class AuthenticationService {
     }
   }
 
-  getUsernameFromToken(token: string | null): string | null {
+  getRole() {
+    let role = this.getRoleFromToken(localStorage.getItem('jwt-token'));
+    if (role == null) {
+      this.logout();
+      return "";
+    }
+    else {
+      return role;
+    }
+  }
+
+  private getUsernameFromToken(token: string | null): string | null {
     if (!token) return null;
 
     try {
       const decoded: ExtendedJwtPayload = jwtDecode(token);
       return decoded.username || null;
+    } catch (e) {
+      return null; // Invalid token
+    }
+  }
+
+  private getRoleFromToken(token: string | null): string | null {
+    if (!token) return null;
+
+    try {
+      const decoded: ExtendedJwtPayload = jwtDecode(token);
+      return decoded.role || null;
     } catch (e) {
       return null; // Invalid token
     }

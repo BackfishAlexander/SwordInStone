@@ -50,6 +50,10 @@ export interface playerCharacter {
   avatarURL: string,
   campaignId: string,
   ownerId: string,
+  owner: {
+    username: string,
+    isSubscriber: boolean,
+  },
   inventoryId: string,
   race: string,
   level: number,
@@ -69,5 +73,11 @@ export interface playerCharacter {
   walkingSpeed: number,
   proficiencies: string[],
   expertise: string[],
-  sheetColor: string
+  sheetColor: string,
+  rainbowSheet: boolean,
+  inventory: Inventory,
+}
+
+export interface Inventory {
+  id: string,
 }

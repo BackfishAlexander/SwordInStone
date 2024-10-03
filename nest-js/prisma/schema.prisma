@@ -10,6 +10,8 @@ datasource db {
 model Users {
   id        String @id @default(uuid()) @db.Uuid
 
+  isSubscriber  Boolean @default(false)
+
   username  String   @unique
   password  String
   role      Role     @default(USER)
@@ -80,6 +82,7 @@ model Characters {
   expertise     String[] @default([])
 
   sheetColor    String @default("#FFFFFF")
+  rainbowSheet  Boolean @default(false)
 }
 
 model CampaignUsers {
@@ -109,13 +112,11 @@ model Item {
   url         String @default("default")
   type        ItemType
 
-  goldCost    Int?
-  silverCost  Int?
-  copperCost  Int?
+  goldValue   Int   @default(0)
+  silverValue Int   @default(0)
+  copperValue Int   @default(0)
 
-  goldValue   Int?
-  silverValue Int?
-  copperValue Int?
+  tags        Tag[] @relation("ItemToTags")
 
   inventories InventoryItem[]
 
@@ -124,13 +125,21 @@ model Item {
 }
 
 model InventoryItem {
+  inventoryItemId       String @id @default(uuid()) @db.Uuid
   itemId       String @db.Uuid
   inventoryId  String @db.Uuid
 
   inventory    Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
   item         Item      @relation(fields: [itemId], references: [id], onDelete: Cascade)
 
-  @@id([inventoryId, itemId])
+  overrideName        String?
+  OverrideDescription String?
+  overrideType        ItemType?
+  overrideValue       Int?
+  quantity            Int?
+  addedTags           Tag[] @relation("InventoryItemToTags")
+
+
   @@unique([inventoryId, itemId])
 }
 
@@ -144,6 +153,16 @@ model Shop {
 
   campaign    Campaigns @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   inventory   Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+}
+
+model Tag {
+  id          Int @id @default(autoincrement())
+  name        String
+  description String
+  color       String
+
+  inventoryItems InventoryItem[] @relation("InventoryItemToTags")
+  items          Item[] @relation("ItemToTags")
 }
 
 enum Role {

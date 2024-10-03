@@ -1,0 +1,14 @@
+<app-navbar></app-navbar>
+<div class="min-h-96">
+    <div id="User" class="bg-base-200 rounded-xl min-h-20 mx-4 p-3 my-2">
+        <h1>User Settings</h1>
+        <hr class="opacity-70">
+
+    </div>
+    <div id="Admin" *ngIf="isAdmin" class="bg-base-200 rounded-xl min-h-20 mx-4 p-3 my-2">
+        <h1>Admin Settings</h1>
+        <hr class="opacity-70">
+        <app-tag-creator></app-tag-creator>
+    </div>
+
+</div>
