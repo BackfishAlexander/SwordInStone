@@ -1,14 +1,41 @@
-import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, OnModuleInit, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
+import { DatabaseService } from 'src/database/database.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
-export class AuthService {
+export class AuthService implements OnModuleInit {
     constructor(
         private usersService: UsersService,
         private jwtService: JwtService,
+        private databaseService: DatabaseService,
+        private configService: ConfigService
     ) {}
+
+    async onModuleInit() {
+        await this.ensureAdminUser();
+    }
+
+    private async ensureAdminUser() {
+      const adminUser = await this.databaseService.users.findUnique({
+        where: { username: 'admin' }
+      });
+
+      if (!adminUser) {
+        const hashedPassword = await bcrypt.hash(this.configService.get<string>('ADMIN_PASSWORD'), 10);
+
+        await this.databaseService.users.create({
+          data: {
+            username: 'admin',
+            password: hashedPassword,
+            role: 'ADMIN',
+            isSubscriber: true,
+          }
+        })
+      }
+    }
 
     async signIn(
         username: string,

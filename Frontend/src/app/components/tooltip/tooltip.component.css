@@ -1,0 +1,17 @@
+.tooltip-box {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.85);
+    opacity: 70%;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    max-width: 300px;
+    z-index: 1000;
+  }
+  .tooltip-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .tooltip-description {
+    font-size: 0.9em;
+  }

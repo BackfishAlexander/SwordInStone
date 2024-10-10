@@ -1,4 +1,4 @@
-<div class="p-4 m-4 bg-base-300 rounded-xl max-w-96">
+<div class="p-4 m-4 bg-base-300 rounded-xl min-w-80 max-w-80">
     <h1>Tag Creator</h1>
     <hr>
     <form (ngSubmit)="onSubmit()" class="space-y-6">
@@ -22,8 +22,8 @@
             id="description"
             [(ngModel)]="formData.description"
             name="description"
-            rows="3"
-            class="mt-1 block w-full px-3 py-2 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-base-200"
+            rows="4"
+            class="mt-1 block w-full px-3 py-2 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-base-200 resize-none"
             required
           ></textarea>
         </div>
@@ -53,4 +53,12 @@
           </button>
         </div>
       </form>
+</div>
+
+<div class="p-4 m-4 bg-base-300 rounded-xl max-w-80 min-w-80">
+  <h1 class="font-bold">Click to delete Tag</h1>
+  <hr class="my-2">
+  <div class="grid grid-cols-3 flex-wrap gap-4">
+    <property-tag *ngFor="let tag of tagList" (click)="deleteTag(tag.id)" [name]="tag.name" [color]="tag.color" [description]="tag.description"></property-tag>
+  </div>
 </div>

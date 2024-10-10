@@ -8,7 +8,11 @@
     <div id="Admin" *ngIf="isAdmin" class="bg-base-200 rounded-xl min-h-20 mx-4 p-3 my-2">
         <h1>Admin Settings</h1>
         <hr class="opacity-70">
-        <app-tag-creator></app-tag-creator>
+        <div class="grid grid-cols-[repeat(auto-fit,_minmax(320px,_1fr))]">
+            <app-tag-creator></app-tag-creator>
+            <app-item-creator></app-item-creator>
+        </div>
+        <app-item-search></app-item-search>
     </div>
 
 </div>

@@ -5,5 +5,8 @@ export const endpointList = {
     characterHP:        "/api/v1/characters/{id}/hp",
     characterColor:     "/api/v1/characters/{id}/color",
     characterRainbow:   "/api/v1/characters/{id}/rainbow-color",
-    addTag:             "/api/v1/admin/create-tag"
+    addTag:             "/api/v1/admin/create-tag",
+    getTag:             "/api/v1/admin/tags",
+    getGlobalItems:     "/api/v1/admin/get-items",
+    createGlobalItem:   "/api/v1/admin/add-item"
 }

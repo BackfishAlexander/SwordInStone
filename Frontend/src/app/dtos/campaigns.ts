@@ -81,3 +81,14 @@ export interface playerCharacter {
 export interface Inventory {
   id: string,
 }
+
+export interface Tag {
+  id: number,
+  name: string,
+  description: string,
+  color: string
+}
+
+export interface TagList {
+  tags: Tag[];
+}

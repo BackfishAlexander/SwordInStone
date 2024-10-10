@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { UserID } from 'src/common/decorators/userid.decorator';
+import { Prisma } from '@prisma/client';
 
 @Controller('admin')
 export class AdminController {
@@ -12,8 +13,29 @@ export class AdminController {
   }
 
   @Post('/create-tag')
-  createTag(tag: {name: string, description: string, color: string}) {
+  createTag(@Body() tag: {name: string, description: string, color: string}) {
     return this.adminService.createTag(tag.name, tag.description, tag.color);
+  }
+
+  @Post('/add-item')
+  createItem(@Body() item: Prisma.ItemCreateInput) {
+    return this.adminService.createItem(item);
+  }
+
+
+  @Post('/get-items')
+  getGlobalItems(@Body() query: { query: string } ) {
+    return this.adminService.getGlobalItems(query.query);
+  }
+
+  @Delete('/tags/:id')
+  deleteTag(@Param('id') id: string) {
+    return this.adminService.deleteTag(+id);
+  }
+
+  @Get('/tags')
+  getTags() {
+    return this.adminService.getTags();
   }
 
   @Post('/user-me')

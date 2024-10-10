@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms'; // Import FormsModule here
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Import FormsModule here
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LandingComponent } from './pages/landing/landing.component';
 import { LogoComponent } from './components/logo/logo.component';
@@ -34,6 +34,10 @@ import { ItemLineComponent } from './components/item-line/item-line.component';
 import { MyAccountComponent } from './pages/my-account/my-account.component';
 import { TagCreatorComponent } from './components/tag-creator/tag-creator.component';
 import { TagComponent } from './components/tag/tag.component';
+import { TooltipComponent } from './components/tooltip/tooltip.component';
+import { TooltipDirective } from './directives/tooltip-directive.directive';
+import { ItemCreatorComponent } from './components/item-creator/item-creator.component';
+import { ItemSearchComponent } from './components/item-search/item-search.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +68,10 @@ import { TagComponent } from './components/tag/tag.component';
     MyAccountComponent,
     TagCreatorComponent,
     TagComponent,
+    TooltipComponent,
+    TooltipDirective,
+    ItemCreatorComponent,
+    ItemSearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +79,8 @@ import { TagComponent } from './components/tag/tag.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ClipboardModule
+    ClipboardModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }

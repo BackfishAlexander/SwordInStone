@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
 
 
@@ -9,8 +10,77 @@ export class AdminService {
 
   }
 
+  private readonly GLOBAL_INVENTORY_ID = '00000000-0000-0000-0000-000000000000';
+
+  async ensureGlobalInventory(): Promise<void> {
+    const globalInventory = await this.databaseService.inventory.findUnique({
+      where: { id: this.GLOBAL_INVENTORY_ID }
+    });
+
+    if (!globalInventory) {
+      await this.databaseService.inventory.create({
+        data: {
+          id: this.GLOBAL_INVENTORY_ID,
+        }
+      })
+    }
+  }
+
+  async createItem(item: Prisma.ItemCreateInput) {
+    await this.ensureGlobalInventory();
+
+    let i = await this.databaseService.item.create({
+      data: {
+        ...item
+      }
+    });
+
+    return this.databaseService.inventoryItem.create({
+      data: {
+        inventory: {
+          connect: {
+            id: this.GLOBAL_INVENTORY_ID
+          }
+        },
+        item: {
+          connect: {
+            id: i.id
+          }
+        }
+      }
+    });
+  }
+
+  async getGlobalItems(query: string) {
+    await this.ensureGlobalInventory();
+    
+    let i = await this.databaseService.inventory.findUnique({
+      where: {
+        id: this.GLOBAL_INVENTORY_ID
+      },
+      select: {
+        items: {
+          select: {
+            item: true,
+          }
+        }
+      }
+    });
+
+
+    let qResults = i.items.map(inventoryItem => inventoryItem.item);
+
+    console.log(query);
+    if (query === "" || query == null) {
+      return qResults;
+    }
+    else {
+      return qResults.filter((item) => item.name.toLowerCase().trim().includes(query.toLowerCase().trim()));
+    }
+  }
+
   async createTag(name: string, description: string, color: string) {
-    this.databaseService.tag.create({
+    return this.databaseService.tag.create({
       data: {
         name,
         description,
@@ -19,10 +89,16 @@ export class AdminService {
     });
   }
 
+  async getTags() {
+    return this.databaseService.tag.findMany({
+      take: 100
+    })
+  }
+
   async deleteTag(id: number) {
-    this.databaseService.tag.delete({
+    return this.databaseService.tag.delete({
       where: {
-        id
+        id: id
       }
     })
   }
