@@ -2,7 +2,7 @@
 <div id="Character" class="pill bg-base-200 rounded-full p-3 m-2 border-base-200 border flex flex-row">
     <div id="character-image" class="avatar">
         <div class="w-24 h-24 rounded-full cursor-pointer" (click)="openModal('character')">
-          <img [src]="character.avatarURL" />
+          <img [src]="character.avatarURL" alt="" />
         </div>
         <div class="hp absolute mt-auto mb-auto hover:cursor-pointer">
           <div (click)="openModal('hp')" class="tooltip tooltip-left" [attr.data-tip]="character.HP +' / ' + character.maxHP + ' HP'">
