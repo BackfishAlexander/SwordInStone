@@ -1,0 +1,58 @@
+<app-navbar></app-navbar>
+
+
+<div *ngIf="loading" class="mt-4 mb-4 flex justify-center">
+    <div class="flex flex-col gap-4 w-52">
+        <div class="skeleton h-32 w-full"></div>
+        <div class="skeleton h-4 w-28"></div>
+        <div class="skeleton h-4 w-full"></div>
+        <div class="skeleton h-4 w-full"></div>
+    </div>
+</div>
+
+
+<div *ngIf="!loading" class="max-w-4xl mx-auto mt-10 space-y-4" @fadeInOut>
+
+    
+    <app-campaign-box *ngFor="let campaign of this.campaignList" [campaign]="campaign" ></app-campaign-box>
+    <!-- Row end -->
+
+</div>
+
+<div class="max-w-4xl mx-auto mt-10 space-y-4">
+    <div class="flex flex-row justify-center">
+        <button onclick="create_campaign_modal.showModal()" class="btn mb-5 bg-blue-500 text-white w-52">Create Campaign</button>
+    </div>
+</div>
+
+<dialog id="create_campaign_modal" class="modal">
+    <div class="modal-box min-w-96">
+      <h3 class="font-bold text-lg mb-2">Create Campaign</h3>
+        <input type="text" [(ngModel)]="campaignName" id="campaignName" name="campaignName" placeholder="Enter campaign name" class="mt-1 p-2 block w-full bg-transparent border-0 focus:outline-none">
+        <hr class="h-px my-1">
+        <textarea id="campaignDescription" [(ngModel)]="campaignDescription" name="campaignDescription" rows="4" placeholder="Enter campaign description" class="resize-none mt-1 p-2 block w-full bg-transparent border-0 focus:outline-none"></textarea>
+        <hr class="h-px my-1">
+        <label class="form-control w-full max-w-xs my-2">
+            <div class="label">
+              <span class="label-text">Campaign Game</span>
+            </div>
+            <select class="select select-bordered">
+              <option selected>DND 5e</option>
+              <option disabled>Star Wars 5e</option>
+              <option disabled>Pathfinder</option>
+              <option disabled>Monster of the Week</option>
+              <option disabled>Blades in the Dark</option>
+            </select>
+          </label>
+        
+        <div class="flex justify-center">
+            <button [disabled]="createLoading" (click)="createCampaign()" class="btn bg-blue-500 text-white w-52">
+                <span *ngIf="createLoading" class="loading loading-spinner"></span>
+                Create
+            </button>
+        </div>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+      <button>close</button>
+    </form>
+</dialog>

@@ -1,0 +1,5 @@
+<div *ngIf="visible" class="tooltip-box" [ngStyle]="{ top: position.y + 'px', left: position.x + 'px', 'background-color': backgroundColor }">
+    <div *ngIf="title" class="tooltip-title">{{ title }}</div>
+    <hr class="mb-1">
+    <div *ngIf="description" class="tooltip-description">{{ description }}</div>
+  </div>

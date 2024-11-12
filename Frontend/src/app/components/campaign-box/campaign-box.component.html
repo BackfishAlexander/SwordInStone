@@ -1,0 +1,14 @@
+<a href="campaign/{{campaign.id}}">
+    <div class="flex mt-2 select-none justify-between items-start bg-base-200 p-4 rounded-lg cursor-pointer transform active:scale-95 transition-transform">
+        <div>
+            <h2 class="text-lg font-bold">{{campaign.name}}</h2>
+            <p class="text-sm text-gray-500">By {{owner}}</p>
+        </div>
+        <div class="text-right">
+            <p class="font-bold">Users</p>
+            <ul *ngFor="let member of users" class="text-sm text-gray-500">
+                <li>{{member}}</li>
+            </ul>
+        </div>
+    </div>
+</a>

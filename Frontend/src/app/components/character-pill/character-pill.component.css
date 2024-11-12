@@ -1,0 +1,142 @@
+.dm-badge {
+    margin-right: 1rem/* 16px */;
+}
+
+.player-badge {
+    margin-right: 0.125rem/* 2px */;
+}
+
+.currency-badge {
+    margin: 0px 4px;
+    color: white;
+    border: solid 1px rgb(20, 20, 20 0.4);
+}
+
+.gold-badge {
+    /* background-color: #b39800; */
+    margin-left: 0px;
+}
+
+.name-text {
+    font-size: clamp(12px, 5vw, 30px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sub-text {
+    font-size: clamp(6px, 5vw, 16px);
+}
+
+/* #Character {
+    max-width: 100vw;
+} */
+
+@media (min-width: 768px)
+{
+    .pill {
+        width: calc(min(60vw, 800px))
+    }
+}
+
+.hp {
+    top: -2px;
+    left: -2px;
+    height: 6.3rem;
+    width: 6.3rem;
+    --size: 6.3rem;
+}
+
+.hp-circle {
+    height: 6.3rem;
+    width: 6.3rem;
+    --size: 6.3rem;
+}
+
+.hp-circle:hover {
+    background-color: rgba(34, 34, 34, 0.589);
+}
+
+.hp-text {
+    font-size: 20px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgb(19, 19, 19);
+}
+
+@media (max-width: 767px) {
+    .modal-box {
+        min-width: 100vw;
+        min-height: 100vh;
+        position: relative;
+    }
+
+    .top-sheet {
+        display: block;
+    }
+
+    .bottom-sheet {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .modal-box {
+        min-width: 500px;
+    }
+    
+    .bottom-sheet {
+        top: 50%; 
+        left: 50%; 
+        transform: translate(calc(-50% + 35px), calc(-50% + 35px)); 
+        background-color: oklch(var(--b3));
+        z-index: 2;
+
+        pointer-events: auto;
+        cursor: pointer;
+    }
+
+    .top-sheet, .top-sheet .content {
+        pointer-events: auto;
+        cursor: auto; /* Optional: Use default cursor for the top sheet */
+    }
+
+    .bottom-sheet:hover {
+        transform: translate(calc(-50% + 80px), calc(-50% + 40px)) rotate(5deg);
+    }
+
+    .bottom-sheet * {
+        pointer-events: none !important;
+        cursor: inherit;
+    }
+
+    .top-sheet {
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+        z-index: 5;
+    }
+
+    .inventory-card-container {
+        height: 60vh;
+    }
+}
+
+/* @media (max-width: 767px) {
+    .top-sheet {
+        height: 100vh;
+        width: 100vw;
+    }
+    
+    .bottom-sheet {
+        height: 100vh;
+        width: 100vw;
+    }
+} */
+
+.my-tab {
+    opacity: 70%;
+}
+
+.my-tab-active {
+    opacity: 100%;
+}

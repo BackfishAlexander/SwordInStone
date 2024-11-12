@@ -1,0 +1,76 @@
+<div class="flex flex-col z-10 mainsheet">
+    <div id="name-level-health" class="flex flex-row justify-between items-center">
+        <h1 class="rounded-lg text-left"><b>{{character.name}}</b>, Level {{character.level}} {{character.class}}</h1>
+        <div id="health" class="flex flex-row rounded-lg p-1 items-center">
+            <h2 class="text-center">HP: <b>{{character.HP}}</b>/<b>{{character.maxHP}}</b></h2>
+        </div>
+    </div>
+    <div class="flex flex-row justify-between items-center">
+        <h1 class="bg-base-300 p-1 rounded-lg border" [ngStyle]="{'border-color': character.sheetColor}">AC: <b>{{calcAC()}}</b></h1>
+        <h1 class="bg-base-300 p-1 rounded-lg border" [ngStyle]="{'border-color': character.sheetColor}">Proficiency Bonus: <b>{{calcProfBonus()}}</b></h1>
+        <h1 class="bg-base-300 p-1 rounded-lg border" [ngStyle]="{'border-color': character.sheetColor}">Walking Speed: <b>{{character.walkingSpeed}}</b></h1>
+    </div>
+    <div id="sheet-stats" class="flex flex-row justify-between mb-2">
+        <div (click)="rollD20()" class="size-16 border my-2 bg-base-300 rounded-lg flex flex-col justify-center cursor-pointer select-none relative" [ngStyle]="{'border-color': character.sheetColor}">
+            <h1 class="text-center">STR</h1>
+            <p class="text-center font-bold">{{utils.calculateModifierFromStat(character.STR)}}</p>
+            <div class="text-center absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-7 h-5 bg-base-100 outline-4 outline-black rounded-full">{{character.STR}}</div>
+        </div>
+        <div (click)="rollD20()" class="size-16 border my-2 bg-base-300 rounded-lg flex flex-col justify-center cursor-pointer select-none relative" [ngStyle]="{'border-color': character.sheetColor}">
+            <h1 class="text-center">DEX</h1>
+            <p class="text-center font-bold">{{utils.calculateModifierFromStat(character.DEX)}}</p>
+            <div class="text-center absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-7 h-5 bg-base-100 outline-4 outline-black rounded-full">{{character.DEX}}</div>
+        </div>
+        <div (click)="rollD20()" class="size-16 border my-2 bg-base-300 rounded-lg flex flex-col justify-center cursor-pointer select-none relative" [ngStyle]="{'border-color': character.sheetColor}">
+            <h1 class="text-center">CON</h1>
+            <p class="text-center font-bold">{{utils.calculateModifierFromStat(character.CON)}}</p>
+            <div class="text-center absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-7 h-5 bg-base-100 outline-4 outline-black rounded-full">{{character.CON}}</div>
+        </div>
+        <div (click)="rollD20()" class="size-16 border my-2 bg-base-300 rounded-lg flex flex-col justify-center cursor-pointer select-none relative" [ngStyle]="{'border-color': character.sheetColor}">
+            <h1 class="text-center">INT</h1>
+            <p class="text-center font-bold">{{utils.calculateModifierFromStat(character.INT)}}</p>
+            <div class="text-center absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-7 h-5 bg-base-100 outline-4 outline-black rounded-full">{{character.INT}}</div>
+        </div>
+        <div (click)="rollD20()" class="size-16 border my-2 bg-base-300 rounded-lg flex flex-col justify-center cursor-pointer select-none relative" [ngStyle]="{'border-color': character.sheetColor}">
+            <h1 class="text-center">WIS</h1>
+            <p class="text-center font-bold">{{utils.calculateModifierFromStat(character.WIS)}}</p>
+            <div class="text-center absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-7 h-5 bg-base-100 outline-4 outline-black rounded-full">{{character.WIS}}</div>
+        </div>
+        <div (click)="rollD20()" class="size-16 border my-2 bg-base-300 rounded-lg flex flex-col justify-center cursor-pointer select-none relative" [ngStyle]="{'border-color': character.sheetColor}">
+            <h1 class="text-center">CHA</h1>
+            <p class="text-center font-bold">{{utils.calculateModifierFromStat(character.CHA)}}</p>
+            <div class="text-center absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-7 h-5 bg-base-100 outline-4 outline-black rounded-full">{{character.CHA}}</div>
+        </div>
+    </div>
+    <div id="bottom" class="flex flex-row justify-between">
+        <div  class="skillbox w-40 mr-1.5 p-2 bg-base-300 overflow-y-scroll border rounded-lg flex-col hidden md:flex" [ngStyle]="{ 'border-color': character.sheetColor }">
+            <p class="mb-2">Saving Throws</p>
+            <hr class="mb-2" [ngStyle]="{ 'border-color': character.sheetColor }">
+            <div class="flex flex-col justify-between flex-grow space-y-2">
+                <app-skill
+                *ngFor="let skill of saveList"
+                [saving]="true"
+                [skill]="skill"
+                [character]="character"
+                ></app-skill>
+            </div>
+        </div>
+        <div class="skillbox mr-1.5 p-2 w-full bg-base-300 overflow-y-scroll border rounded-lg flex flex-col align-middle min-w-64 md:" [ngStyle]="{'border-color': character.sheetColor}">
+            <p>Skills</p>
+            <hr [ngStyle]="{ 'border-color': character.sheetColor }">
+            <app-skill *ngFor="let skill of skillList" [skill]="skill" [character]="character"></app-skill>
+        </div>
+    </div>
+    <div  class="mt-2 mr-1.5 p-2 bg-base-300 overflow-y-scroll border rounded-lg flex-col flex md:hidden" [ngStyle]="{ 'border-color': character.sheetColor }">
+        <p class="mb-2">Saving Throws</p>
+        <hr class="mb-2" [ngStyle]="{ 'border-color': character.sheetColor }">
+        <div class="flex flex-col justify-between flex-grow">
+            <app-skill
+            *ngFor="let skill of saveList"
+            [saving]="true"
+            [skill]="skill"
+            [character]="character"
+            ></app-skill>
+        </div>
+    </div>
+</div>

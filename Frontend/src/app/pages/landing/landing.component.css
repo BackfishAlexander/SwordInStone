@@ -1,0 +1,75 @@
+.landing-container {
+    position: relative;
+    width: calc(100% - 5px);
+    height: 90vh;
+    background: url('/assets/dragon.png') no-repeat center center/cover;
+    border-radius: 5px 5px 25px 25px;
+    margin: 5px 5px;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    margin: 0;
+    font-weight: bold;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9);
+  }
+
+  h2 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+  
+  hr {
+    width: 300px;
+    height: 1px;
+    background: #fff;
+    border: none;
+    margin: 20px 0;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+  }
+  
+  .sign-up {
+    background-color: #4caf50;
+    color: #fff;
+  }
+  
+  .login {
+    background-color: #2196f3;
+    color: #fff;
+  }
+  
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  

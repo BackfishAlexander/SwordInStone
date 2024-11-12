@@ -1,0 +1,185 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id        String @id @default(uuid()) @db.Uuid
+
+  isSubscriber  Boolean @default(false)
+
+  username  String   @unique
+  password  String
+  role      Role     @default(USER)
+  
+  bio       String?  @default("No user bio")
+  avatarURL String   @default("default")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  campaigns CampaignUsers[]
+  createdItems Item[] @relation("UserCreatedItems")
+  ownedCampaigns Campaigns[] @relation("CampaignOwner")
+  ownedCharacters Characters[]
+}
+
+model Campaigns {
+  id          String @id @default(uuid()) @db.Uuid
+  name        String
+  description String
+
+  ownerId     String @db.Uuid
+  owner       Users @relation("CampaignOwner", fields: [ownerId], references: [id])
+
+  members     CampaignUsers[]
+  characters  Characters[]
+  shops       Shop[]
+}
+
+model Characters {
+  id          String @id @default(uuid()) @db.Uuid
+
+  name        String
+  description String? @default("No description")
+  avatarURL   String  @default("https://www.dndbeyond.com/avatars/40939/576/1581111423-121855753.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp")
+
+  campaign    Campaigns @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  campaignId  String @db.Uuid
+
+  owner       Users @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId     String @db.Uuid
+
+  inventory   Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+  inventoryId String @db.Uuid @unique
+
+  race        String?
+  level       Int?
+  class       String?
+
+  STR         Int @default(10)
+  DEX         Int @default(10)
+  CON         Int @default(10)
+  WIS         Int @default(10)
+  INT         Int @default(10)
+  CHA         Int @default(10)
+
+  GP          Int @default(0)
+  SP          Int?
+  CP          Int?
+
+  HP          Int @default(1)
+  maxHP       Int @default(1)
+
+  AC          Int? 
+  walkingSpeed Int  @default(30) //DND walking speed
+
+  proficiencies String[] @default([])
+  expertise     String[] @default([])
+
+  sheetColor    String @default("#FFFFFF")
+  rainbowSheet  Boolean @default(false)
+}
+
+model CampaignUsers {
+  campaignId String @db.Uuid
+  userId     String @db.Uuid
+
+  campaign  Campaigns @relation(fields: [campaignId], references: [id])
+
+  user      Users     @relation(fields: [userId], references: [id])
+
+  @@id([campaignId, userId])
+  @@unique([campaignId, userId])
+}
+
+model Inventory {
+  id         String @id @default(uuid()) @db.Uuid
+  items      InventoryItem[]
+  shop       Shop?
+  character  Characters?
+}
+
+model Item {
+  id          String @id @default(uuid()) @db.Uuid
+
+  name        String
+  description String?
+  url         String @default("default")
+  type        ItemType
+
+  goldValue   Int   @default(0)
+  silverValue Int   @default(0)
+  copperValue Int   @default(0)
+
+  tags        Tag[] @relation("ItemToTags")
+
+  inventories InventoryItem[]
+
+  creatorId   String?  @db.Uuid
+  creator     Users?   @relation("UserCreatedItems", fields: [creatorId], references: [id])
+}
+
+model InventoryItem {
+  inventoryItemId       String @id @default(uuid()) @db.Uuid
+  itemId       String @db.Uuid
+  inventoryId  String @db.Uuid
+
+  inventory    Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+  item         Item      @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  overrideName        String?
+  OverrideDescription String?
+  overrideType        ItemType?
+  overrideValue       Int?
+  quantity            Int?
+  addedTags           Tag[] @relation("InventoryItemToTags")
+
+
+  @@unique([inventoryId, itemId])
+}
+
+model Shop {
+  id          String @id @default(uuid()) @db.Uuid
+  name        String
+  description String
+  campaignId  String @db.Uuid
+  inventoryId String @db.Uuid @unique
+  enabled     Boolean @default(false)
+
+  campaign    Campaigns @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  inventory   Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+}
+
+model Tag {
+  id          Int @id @default(autoincrement())
+  name        String
+  description String
+  color       String
+
+  inventoryItems InventoryItem[] @relation("InventoryItemToTags")
+  items          Item[] @relation("ItemToTags")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum ItemType {
+  HELMET
+  MASK
+  CHESTPIECE
+  GAUNTLET
+  GLOVE
+  PANTS
+  BOOTS
+  ACCESSORY
+  JEWELRY
+  WEAPON
+  ARTIFACT
+}

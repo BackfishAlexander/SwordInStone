@@ -1,0 +1,8 @@
+<div id="skill" class="flex flex-row items-center justify-between my-0.5">
+    <div class="flex items-center">
+        <div [class]="getProficiencyTag()"></div>
+        <p class="mr-1 font-semibold">{{getSkillStat()}}</p>
+        <p *ngIf="!saving" class="mr-2 font-mono align-middle">{{skill}}</p>
+    </div>
+    <div (click)="rollD20()" class="font-mono bg-base-100 p-0.5 align-middle rounded-md select-none cursor-pointer">{{getSkillModifier()}}</div>
+</div>
